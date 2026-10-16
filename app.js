@@ -135,7 +135,8 @@
         vx: (Math.random() - .5) * (x == null ? 2 : 10),
         vy: x == null ? Math.random() * 2 + 1 : -Math.random() * 9,
         w: 5 + Math.random() * 6, h: 3 + Math.random() * 5,
-        r: Math.random() * 6, c: c[k % c.length], l: 300 + Math.random() * 200
+        r: Math.random() * 6, c: c[k % c.length], l: 300 + Math.random() * 200,
+        shape: Math.random() < .35 ? 'circle' : 'rect'
       });
     }
     if (!running) { running = true; tick(); }
@@ -146,7 +147,12 @@
     P.forEach(function (p) {
       p.x += p.vx; p.y += p.vy; p.vy += .12; p.r += .1; p.l--;
       cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r);
-      cx.fillStyle = p.c; cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      cx.fillStyle = p.c;
+      if (p.shape === 'circle') {
+        cx.beginPath(); cx.arc(0, 0, p.w / 2, 0, Math.PI * 2); cx.fill();
+      } else {
+        cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      }
       cx.restore();
     });
     if (P.length) requestAnimationFrame(tick); else running = false;
