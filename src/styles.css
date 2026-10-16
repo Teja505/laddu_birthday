@@ -27,6 +27,32 @@ body.night .aurora,body.glow .aurora,body.pink .aurora{opacity:0}
 .scene.leaving{display:flex;animation:scene-out .55s ease forwards;pointer-events:none}
 @keyframes scene-in{from{opacity:0;transform:translateY(14px) scale(.97);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
 @keyframes scene-out{from{opacity:1;transform:none;filter:blur(0)}to{opacity:0;transform:translateY(-14px) scale(1.03);filter:blur(5px)}}
+.scene.on::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.55),transparent 55%);
+  animation:scene-flash .9s ease-out forwards}
+@keyframes scene-flash{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(1.6)}}
+
+/* per-scene ambient color tint, layered above the body background */
+#s3{background:radial-gradient(ellipse at 50% 0%,rgba(255,179,71,.14),transparent 62%)}
+#s4{background:radial-gradient(ellipse at 50% 0%,rgba(157,122,235,.14),transparent 62%)}
+#s5{background:radial-gradient(ellipse at 50% 0%,rgba(240,180,120,.14),transparent 62%)}
+#sBalloons{background:radial-gradient(ellipse at 50% 0%,rgba(90,200,170,.14),transparent 62%)}
+
+/* animated flourish underline beneath hero headings */
+.flourish{width:84px;height:3px;margin:0 auto;border-radius:3px;transform:scaleX(0);transform-origin:center;
+  background:linear-gradient(90deg,transparent,var(--rose),var(--gold),var(--rose),transparent);
+  animation:flourish-in 1s .35s cubic-bezier(.3,1,.4,1) forwards}
+@keyframes flourish-in{to{transform:scaleX(1)}}
+
+/* button ripple */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:scale(0);
+  animation:ripple-anim .6s ease-out;pointer-events:none}
+@keyframes ripple-anim{to{transform:scale(2.4);opacity:0}}
+
+/* cursor sparkle trail (fine pointers only, see App.jsx) */
+.cursor-sparkle{position:fixed;pointer-events:none;z-index:50;font-size:.85rem;color:var(--rose);
+  transform:translate(-50%,-50%);animation:sparkle-fade .7s ease-out forwards}
+@keyframes sparkle-fade{to{opacity:0;transform:translate(-50%,-50%) scale(.3) translateY(-16px)}}
 
 .tag{font:600 1.25rem Caveat,cursive;color:var(--rose);letter-spacing:.3px;display:inline-block;
   padding:4px 16px;background:rgba(217,64,106,.08);border-radius:999px}

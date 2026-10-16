@@ -118,6 +118,14 @@ export default function App() {
       cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r);
       cx.fillStyle = p.c;
       if (p.shape === 'circle') { cx.beginPath(); cx.arc(0, 0, p.w / 2, 0, Math.PI * 2); cx.fill(); }
+      else if (p.shape === 'heart') {
+        const s = p.w / 10;
+        cx.beginPath();
+        cx.moveTo(0, 2 * s);
+        cx.bezierCurveTo(-5 * s, -3 * s, -10 * s, 1 * s, 0, 6 * s);
+        cx.bezierCurveTo(10 * s, 1 * s, 5 * s, -3 * s, 0, 2 * s);
+        cx.fill();
+      }
       else { cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
       cx.restore();
     });
@@ -137,7 +145,7 @@ export default function App() {
         vy: x == null ? Math.random() * 2 + 1 : -Math.random() * 9,
         w: 5 + Math.random() * 6, h: 3 + Math.random() * 5,
         r: Math.random() * 6, c: colors[k % colors.length], l: 300 + Math.random() * 200,
-        shape: Math.random() < 0.35 ? 'circle' : 'rect',
+        shape: Math.random() < 0.18 ? 'heart' : Math.random() < 0.45 ? 'circle' : 'rect',
       });
     }
     if (!runningRef.current) { runningRef.current = true; tick(); }
@@ -159,6 +167,23 @@ export default function App() {
       });
       setTimeout(() => el.remove(), 1200);
     }
+  }
+
+  /* ---------- button ripple (delegated at the root, appended to body so React never reconciles it away) ---------- */
+  function handleRootRipple(e) {
+    const btn = e.target.closest && e.target.closest('button');
+    if (!btn || btn.disabled) return;
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.position = 'fixed';
+    span.style.width = span.style.height = size + 'px';
+    span.style.left = e.clientX - size / 2 + 'px';
+    span.style.top = e.clientY - size / 2 + 'px';
+    span.style.zIndex = 60;
+    document.body.appendChild(span);
+    setTimeout(() => span.remove(), 650);
   }
 
   /* ---------- scene switching ---------- */
@@ -430,6 +455,28 @@ export default function App() {
     document.body.className = bodyClass;
   }, [bodyClass]);
 
+  /* ---------- cursor sparkle trail (desktop only, respects reduced motion) ---------- */
+  useEffect(() => {
+    const fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fine || reduceMotion) return;
+    let last = 0;
+    function onMove(e) {
+      const now = Date.now();
+      if (now - last < 70) return;
+      last = now;
+      const s = document.createElement('span');
+      s.className = 'cursor-sparkle';
+      s.textContent = Math.random() < 0.5 ? '\u2728' : '\u2022';
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 700);
+    }
+    window.addEventListener('pointermove', onMove);
+    return () => window.removeEventListener('pointermove', onMove);
+  }, []);
+
   const envelopeHtml = CONFIG.envelopeImage ? `<img src="${resolved(CONFIG.envelopeImage)}" alt="">` : DEFAULT_ENVELOPE_SVG;
   const envPeekHtml = CONFIG.envelopePeekImage
     ? `<img class="env-peek-photo" src="${resolved(CONFIG.envelopePeekImage)}" alt="">`
@@ -442,7 +489,7 @@ export default function App() {
   const sceneClass = (id) => `scene${activeId === id ? ' on' : ''}${leavingId === id ? ' leaving' : ''}`;
 
   return (
-    <>
+    <div className="app-root" onPointerDown={handleRootRipple}>
       <div className="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
       <div className="stars" ref={starsRef} aria-hidden="true"></div>
       <div className="rays" aria-hidden="true"></div>
@@ -457,6 +504,7 @@ export default function App() {
       <section className={sceneClass('s1')} id="s1">
         <span className="tag">a little something ✦</span>
         <h1 className="shimmer">There's something <em>for you</em></h1>
+        <div className="flourish" aria-hidden="true"></div>
         <p className="sub">A tiny birthday surprise, made just for you.</p>
         <div className="env-wrap">
           <div className={`env-peek${envPeekShow ? ' show' : ''}`} dangerouslySetInnerHTML={{ __html: envPeekHtml }} />
@@ -579,10 +627,11 @@ export default function App() {
           <span className="shimmer line1">Happy Birthday</span>
           <span className="line2">cute <em>{D.name}</em>! 🎂</span>
         </h1>
+        {activeId === 's6' && <div className="flourish" aria-hidden="true"></div>}
         <p className="sub">{D.wish}</p>
         <p className="sub">— with love, {D.from}? 💕</p>
         <button className="ghost" onClick={() => { setup(); go('s1'); }}>Replay the surprise ↻</button>
       </section>
-    </>
+    </div>
   );
 }
