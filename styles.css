@@ -61,27 +61,19 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
 @keyframes shoot{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(115vw,-40vh) rotate(360deg)}}
 
 /* envelope */
-.env-wrap{position:relative;width:min(300px,80vw);margin-top:clamp(60px,16vh,90px);animation:float 3s ease-in-out infinite;touch-action:manipulation}
-.envelope{position:relative;width:100%;aspect-ratio:3/2;perspective:800px}
-.env-back{position:absolute;inset:0;border-radius:10px;background:linear-gradient(160deg,#f3dca8,#e2bd82);
-  box-shadow:0 16px 30px var(--shadow);z-index:1}
-.env-photo{position:absolute;left:50%;top:50%;width:58%;transform:translate(-50%,-50%) scale(.3);opacity:0;z-index:2;
-  transition:transform 1s .55s cubic-bezier(.25,1.5,.3,1),opacity .6s .55s;pointer-events:none}
-.env-photo img,.env-photo svg{width:100%;display:block;border-radius:10px;box-shadow:0 16px 28px var(--shadow)}
-.env-photo .env-caption{margin-top:8px;background:#fff;color:var(--ink);font-family:Caveat,cursive;font-weight:600;
-  font-size:1.05rem;padding:5px 15px;border-radius:10px;box-shadow:0 6px 14px var(--shadow);display:inline-block}
-.envelope.open .env-photo{transform:translate(-50%,-62%) scale(1);opacity:1;z-index:6}
-.env-front{position:absolute;inset:0;border-radius:10px;z-index:3;
-  background:linear-gradient(200deg,#fbefd9,#f3dca8);
-  clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
-.env-flap{position:absolute;left:0;right:0;top:0;height:62%;z-index:4;transform-origin:top center;
-  background:linear-gradient(160deg,#e9c88c,#d4a85f);clip-path:polygon(0 0,100% 0,50% 100%);
-  box-shadow:inset 0 -4px 6px rgba(0,0,0,.12);transition:transform 1s cubic-bezier(.4,.1,.2,1),opacity .5s .4s}
-.envelope.open .env-flap{transform:rotateX(150deg) translateY(-6px);opacity:.2}
-.env-seal{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:15%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#e0617a,#b8283f 70%);display:flex;align-items:center;justify-content:center;
-  color:#ffd9de;font-size:.8rem;box-shadow:0 3px 8px rgba(0,0,0,.35);z-index:5;transition:opacity .4s,transform .4s}
-.envelope.open .env-seal{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+.env-wrap{position:relative;width:min(300px,80vw);margin-top:clamp(80px,20vh,120px);animation:float 3s ease-in-out infinite;touch-action:manipulation}
+.env-art svg,.env-art img{width:100%;display:block;filter:drop-shadow(0 12px 20px var(--shadow))}
+
+.env-peek{position:absolute;left:50%;bottom:58%;width:min(170px,48vw);transform:translate(-50%,-10px) scale(1);opacity:1;
+  display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;z-index:2}
+.env-peek.show{animation:env-peek 1.2s .2s cubic-bezier(.3,1.6,.4,1) both}
+@keyframes env-peek{0%{opacity:0;transform:translate(-50%,40px) scale(.3)}60%{opacity:1;transform:translate(-50%,-20px) scale(1.06)}100%{opacity:1;transform:translate(-50%,-10px) scale(1)}}
+.env-peek-photo{width:100%;display:block;filter:drop-shadow(0 14px 22px var(--shadow))}
+.env-bear{width:70px}
+.env-bear svg,.env-bear img{width:100%;display:block}
+.env-card{background:#fff;color:var(--ink);font-family:Caveat,cursive;font-weight:600;font-size:1.1rem;
+  padding:6px 16px;border-radius:12px;box-shadow:0 6px 14px var(--shadow);white-space:nowrap}
+.env-card em{color:var(--rose);font-style:normal}
 @keyframes float{50%{transform:translateY(-8px) rotate(-1deg)}}
 
 /* cake */

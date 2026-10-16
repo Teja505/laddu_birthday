@@ -12,10 +12,17 @@ window.BIRTHDAY_CONFIG = {
   // The letter revealed on the typewriter screen. Use blank lines for paragraph breaks.
   letter: "I wanted to make you something small, but with a lot of love inside it.\n\nYou make ordinary days feel softer and brighter just by being in them. Thank you for being exactly who you are.\n\nWhatever you wished for tonight, I hope it finds its way to you.\n\nHappy birthday. I'm so glad you exist.",
 
-  // Optional: custom character image used for the mascot (corner peek, envelope reveal, wish screen, finale),
-  // e.g. "photos/mascot.png". When set, it also replaces the photo that comes out of the envelope.
+  // Optional: custom envelope image, e.g. "photos/envelope.png".
+  // Leave empty to use the built-in default illustration.
+  envelopeImage: "",
+
+  // Optional: custom character image used for the mascot (corner peek, wish screen, finale), e.g. "photos/mascot.png".
   // Leave empty to use the built-in default bear illustration.
   mascotImage: "",
+
+  // Optional: photo that pops out of the envelope on the landing screen, e.g. "photos/teja.png".
+  // Leave empty to use the default bear + "This is for you" card instead.
+  envelopePeekImage: "photos/teja.png",
 
   // Optional: custom cake image, e.g. "photos/cake.png". Used for the cuttable cake and the small wish-screen icon.
   // Leave empty to use the built-in default illustration.
