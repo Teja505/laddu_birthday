@@ -57,9 +57,17 @@ button.mini::after{display:none}
 .row{display:flex;gap:14px;align-items:center;justify-content:center;position:relative;height:56px;width:min(260px,90vw)}
 .row button{position:absolute}
 
-/* night scene text colors */
-#night h1,#night h2{color:#fff}#night .sub{color:#b9b6e6}#night .tag{color:#ffd86b}
-#night button{background:#e9c9a8;color:#3a2a2a}
+/* night scene text colors, smoothly adapting when the lights come on (body.glow) */
+.night-content{display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.5vh,14px);transition:opacity .5s ease}
+.night-content.fading{opacity:0;pointer-events:none}
+#night h1,#night h2{color:#fff;transition:color .8s}
+#night .sub{color:#b9b6e6;transition:color .8s}
+#night .tag{color:#ffd86b;transition:color .8s}
+#night button{background:#e9c9a8;color:#3a2a2a;transition:background .8s,color .8s}
+body.glow #night h1,body.glow #night h2{color:var(--ink)}
+body.glow #night .sub{color:var(--sub)}
+body.glow #night .tag{color:var(--rose)}
+body.glow #night button{background:linear-gradient(135deg,var(--grad1),var(--btn));color:#fff}
 
 /* ambient: stars, rays, bunting, sleepy mascot */
 .stars{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity 1s;z-index:0}

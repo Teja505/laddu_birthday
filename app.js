@@ -205,6 +205,7 @@
     $('b5').classList.add('hide');
     $('wishstar').classList.remove('go');
     $('b2').disabled = false;
+    $('nightContent').classList.remove('fading');
     $('b4').disabled = false;
     $('noBtn').style.left = ''; $('noBtn').style.right = '0'; $('noBtn').style.top = '';
     $('bgm').pause(); $('bgm').currentTime = 0;
@@ -227,6 +228,7 @@
     document.body.className = 'glow';
     burst(40);
     this.disabled = true;
+    $('nightContent').classList.add('fading');
     setTimeout(function () { document.body.className = ''; go('s3'); }, 1800);
   };
 
