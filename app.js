@@ -348,13 +348,18 @@
   function balloons() {
     var field = $('bfield'), popped = 0;
     field.innerHTML = '';
-    var cols = [4, 37, 70], rows = [2, 48];
-    var positions = [];
-    rows.forEach(function (row) {
-      cols.forEach(function (col) {
-        positions.push([col + (Math.random() * 8 - 4), row + (Math.random() * 10 - 5)]);
+    var fw = field.clientWidth || 380, fh = field.clientHeight || 420;
+    var bw = 110, bh = 150, positions = [], tries = 0;
+    while (positions.length < BALLOON_COUNT && tries < 500) {
+      tries++;
+      var x = Math.random() * Math.max(1, fw - bw);
+      var y = Math.random() * Math.max(1, fh - bh);
+      var ok = positions.every(function (p) {
+        return Math.abs(p[0] - x) > bw * .7 || Math.abs(p[1] - y) > bh * .55;
       });
-    });
+      if (ok) positions.push([x, y]);
+    }
+    while (positions.length < BALLOON_COUNT) positions.push([Math.random() * Math.max(1, fw - bw), Math.random() * Math.max(1, fh - bh)]);
     shuffle(positions);
     var images = (Array.isArray(config.balloonImages) && config.balloonImages.length) ? config.balloonImages : DEFAULT_BALLOON_IMAGES;
     for (var i = 0; i < BALLOON_COUNT; i++) {
@@ -362,8 +367,8 @@
         var b = document.createElement('button');
         b.className = 'bal';
         b.setAttribute('aria-label', 'Pop balloon ' + (i + 1));
-        b.style.left = positions[i][0] + '%';
-        b.style.top = positions[i][1] + '%';
+        b.style.left = positions[i][0] + 'px';
+        b.style.top = positions[i][1] + 'px';
         b.style.animationDelay = (i * .3) + 's';
         var color = BALLOON_COLORS[i % BALLOON_COLORS.length];
         b.innerHTML = '<svg viewBox="0 0 84 120"><ellipse cx="42" cy="44" rx="34" ry="40" fill="' + color + '" opacity=".88"/><ellipse cx="30" cy="30" rx="8" ry="14" fill="#fff" opacity=".5"/><path d="M42 84 l-5 8 h10z" fill="' + color + '"/><path d="M42 92 q-10 12 0 28" stroke="#d9587c" fill="none" stroke-width="2"/></svg>';
