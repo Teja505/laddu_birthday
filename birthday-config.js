@@ -36,9 +36,15 @@ window.BIRTHDAY_CONFIG = {
   // Leave empty to keep showing wishImage (or the default bear illustration).
   wishMadeImage: "photos/made a wish.png",
 
-  // Optional: one photo revealed per popped balloon on the "Some Sweet Memories" screen (needs 4).
-  // Leave empty to reuse the photos above.
-  balloonImages: ["photos/teja.png", "photos/close your eyes .png", "photos/made a wish.png", "photos/cute laddu.png"],
+  // One photo revealed per popped balloon on the "Some Sweet Memories" screen (6 balloons = 6 photos).
+  balloonImages: [
+    "photos/Media (1).jfif",
+    "photos/Media (2).jfif",
+    "photos/Media (3).jfif",
+    "photos/Media (4).jfif",
+    "photos/Media (5).jfif",
+    "photos/Media (6).jfif"
+  ],
 
   // Optional: custom cake image, e.g. "photos/cake.png". Used for the cuttable cake and the small wish-screen icon.
   // Leave empty to use the built-in default illustration.
