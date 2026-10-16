@@ -11,6 +11,7 @@ body{
 body.night{background:radial-gradient(ellipse at 50% 30%,#2a2760,#14123a 70%)}
 body.glow{background:radial-gradient(ellipse at 50% 20%,#fff2b8,#f6d9e6 55%,#c9b7e8)}
 body.pink{background:linear-gradient(160deg,#fde9ef,#f6c9dc 55%,#cdb9ee)}
+#root{position:fixed;inset:0}
 
 /* aurora background blobs */
 .aurora{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none;transition:opacity 1s}
@@ -66,6 +67,7 @@ button.ghost{background:#fff;color:var(--ink)}
 button.ghost::after{display:none}
 button.mini{padding:9px 18px;min-height:auto;font-size:.85rem;box-shadow:none;opacity:.8}
 button.mini::after{display:none}
+button:disabled{opacity:.6;cursor:default}
 .hide{display:none!important}
 .row{display:flex;gap:14px;align-items:center;justify-content:center;position:relative;height:56px;width:min(260px,90vw)}
 .row button{position:absolute}
@@ -149,7 +151,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
 .dots span:nth-child(3){animation-delay:.4s}
 @keyframes dot-pulse{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
-/* balloons: width/height set per-balloon via inline style in app.js so they always fit without overlap */
+/* balloons: width/height set per-balloon via inline style so they always fit without overlap */
 #bfield{position:relative;width:min(380px,92vw);height:min(460px,56vh);min-height:380px}
 .bal{position:absolute;border:0;padding:0;
   background:none;box-shadow:none;touch-action:manipulation;animation:bob 3s ease-in-out infinite}

@@ -12,88 +12,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600;1,9..144,700&family=Quicksand:wght@500;600;700&family=Caveat:wght@600;700&display=swap">
-<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="stars" id="stars" aria-hidden="true"></div>
-<div class="rays" aria-hidden="true"></div>
-<svg class="bunting" viewBox="0 0 400 50" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 Q200 40 400 4" stroke="#b8946a" fill="none" stroke-width="2"/><g id="flags"></g></svg>
-<canvas id="cv"></canvas>
-<div id="wishstar" class="wishstar" aria-hidden="true">⭐</div>
-<audio id="bgm" src="audio/nastelbom-happy-birthday-471481.mp3" preload="auto" loop></audio>
-
-<section class="scene on" id="s1">
-  <span class="tag">a little something ✦</span>
-  <h1 class="shimmer">There's something <em>for you</em></h1>
-  <p class="sub">A tiny birthday surprise, made just for you.</p>
-  <div class="env-wrap">
-    <div class="env-peek" id="envPeek"></div>
-    <div class="env-art" id="env"></div>
-  </div>
-  <p class="sub">Are you excited?</p>
-  <div class="row"><button id="b1" style="left:0">Yes</button><button id="noBtn" class="ghost" style="right:0">No</button></div>
-</section>
-
-<section class="scene" id="night">
-  <div class="night-content" id="nightContent">
-    <span class="tag">Shhh...</span>
-    <h1>The room is<br>waiting for you.</h1>
-    <p class="sub">Someone left the lights off on purpose.</p>
-    <button id="b2">Turn on the lights</button>
-  </div>
-</section>
-
-<section class="scene" id="s3">
-  <span class="tag" id="c-tag">Cake time</span>
-  <h2 id="c-h">Blow out the candles ✨</h2>
-  <p class="sub" id="c-p">Tap the cake, or blow into your mic.</p>
-  <div id="cakebox" tabindex="0">
-    <div id="knife"></div>
-    <div class="cake-stage" id="cakeStage">
-      <div id="hl" class="cake-half cake-left"></div>
-      <div id="hr" class="cake-half cake-right"></div>
-    </div>
-  </div>
-  <button id="cutAnyway" class="ghost mini hide">Can't swipe? Cut it for me</button>
-  <button id="b3" class="hide">Make a wish ✨</button>
-</section>
-
-<section class="scene" id="s4">
-  <div class="pair">
-    <div id="bearA" class="mascot-sm"></div>
-    <div id="cakeB" class="mascot-sm"></div>
-  </div>
-  <h2 id="w-h">Close your eyes...</h2>
-  <p class="sub" id="w-p">Make a little wish for the year ahead.</p>
-  <button id="b4">I made my wish ✨</button>
-  <p class="sub loading hide" id="w-loading">Getting your letter ready<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
-</section>
-
-<section class="scene" id="s5">
-  <h2>For you, <em id="ln"></em></h2>
-  <div id="paper"></div>
-  <button id="b5" class="hide">Continue</button>
-</section>
-
-<section class="scene" id="sBalloons">
-  <h2>Some Sweet Memories</h2>
-  <p class="sub">Pop all 6 balloons</p>
-  <div id="bfield"></div>
-</section>
-
-<section class="scene" id="s6">
-  <div id="bearF" class="mascot-lg"></div>
-  <h1 class="split-heading">
-    <span class="shimmer line1">Happy Birthday</span>
-    <span class="line2">cute <em id="fn"></em>! 🎂</span>
-  </h1>
-  <p class="sub" id="wish"></p>
-  <p class="sub" id="sig"></p>
-  <button id="again" class="ghost">Replay the surprise ↻</button>
-</section>
-
-<script src="birthday-config.js"></script>
-<script src="app.js"></script>
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
