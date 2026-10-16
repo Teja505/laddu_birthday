@@ -349,17 +349,22 @@
     var field = $('bfield'), popped = 0;
     field.innerHTML = '';
     var fw = field.clientWidth || 380, fh = field.clientHeight || 420;
-    var bw = 110, bh = 150, positions = [], tries = 0;
-    while (positions.length < BALLOON_COUNT && tries < 500) {
-      tries++;
-      var x = Math.random() * Math.max(1, fw - bw);
-      var y = Math.random() * Math.max(1, fh - bh);
-      var ok = positions.every(function (p) {
-        return Math.abs(p[0] - x) > bw * .7 || Math.abs(p[1] - y) > bh * .55;
-      });
-      if (ok) positions.push([x, y]);
+    var cols = 2, rows = 3;
+    var cellW = fw / cols, cellH = fh / rows;
+    /* size balloons to fit their cell (82% of cell), keeping the 84:120 artwork ratio, so they can never overlap */
+    var ratio = 84 / 120, maxW = cellW * .82, maxH = cellH * .82, bw, bh;
+    if (maxW / ratio <= maxH) { bw = maxW; bh = maxW / ratio; } else { bh = maxH; bw = maxH * ratio; }
+    bw = Math.max(54, Math.min(126, bw)); bh = bw / ratio;
+    var positions = [];
+    for (var row = 0; row < rows; row++) {
+      for (var col = 0; col < cols; col++) {
+        var slackX = Math.max(0, cellW - bw), slackY = Math.max(0, cellH - bh);
+        positions.push([
+          col * cellW + slackX / 2 + (Math.random() * slackX * .5 - slackX * .25),
+          row * cellH + slackY / 2 + (Math.random() * slackY * .5 - slackY * .25)
+        ]);
+      }
     }
-    while (positions.length < BALLOON_COUNT) positions.push([Math.random() * Math.max(1, fw - bw), Math.random() * Math.max(1, fh - bh)]);
     shuffle(positions);
     var images = (Array.isArray(config.balloonImages) && config.balloonImages.length) ? config.balloonImages : DEFAULT_BALLOON_IMAGES;
     for (var i = 0; i < BALLOON_COUNT; i++) {
@@ -367,6 +372,7 @@
         var b = document.createElement('button');
         b.className = 'bal';
         b.setAttribute('aria-label', 'Pop balloon ' + (i + 1));
+        b.style.width = bw + 'px'; b.style.height = bh + 'px';
         b.style.left = positions[i][0] + 'px';
         b.style.top = positions[i][1] + 'px';
         b.style.animationDelay = (i * .3) + 's';
