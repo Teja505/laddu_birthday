@@ -29,6 +29,7 @@ button{font:600 1rem Inter,system-ui,sans-serif;color:#fff;background:var(--btn)
 button:active{transform:scale(.95)}
 button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 button.ghost{background:#fff;color:var(--ink)}
+button.mini{padding:9px 18px;min-height:auto;font-size:.85rem;box-shadow:none;opacity:.8}
 .hide{display:none!important}
 
 /* night scene text colors */

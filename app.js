@@ -159,6 +159,7 @@
     $('wish').textContent = D.wish;
     $('sig').textContent = '\u2014 with love, ' + D.from;
     $('cakebox').classList.remove('cut');
+    $('cutAnyway').classList.remove('hide');
     $('b3').classList.add('hide');
     $('c-tag').textContent = 'Cake time';
     $('c-h').textContent = 'Make the first cut \u2728';
@@ -205,8 +206,10 @@
     $('c-tag').textContent = 'Cake time \uD83C\uDF89';
     $('c-h').textContent = 'You did it! \uD83C\uDF8A';
     $('c-p').textContent = 'The first slice is always the sweetest one.';
+    $('cutAnyway').classList.add('hide');
     $('b3').classList.remove('hide');
   }
+  $('cutAnyway').onclick = function () { cut(); };
   $('b3').onclick = function () { done = false; go('s4'); };
 
   $('b4').onclick = function () {
