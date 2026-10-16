@@ -45,6 +45,11 @@
     return variant === 'icon' ? DEFAULT_CAKE_ICON_SVG : DEFAULT_CAKE_SVG;
   }
 
+  function wishArt(stage) {
+    var src = stage === 'made' ? (config.wishMadeImage || config.wishImage) : config.wishImage;
+    return src ? '<img src="' + src + '" alt="">' : bear({});
+  }
+
   function bear(opts) {
     if (config.mascotImage) return '<img src="' + config.mascotImage + '" alt="">';
     opts = opts || {};
@@ -63,7 +68,6 @@
   }
 
   $('sleepy').innerHTML = bear({ sleep: 1 });
-  $('bearA').innerHTML = bear({});
   $('bearF').innerHTML = bear({ balloon: 1 });
   $('envPeek').innerHTML = config.envelopePeekImage
     ? '<img class="env-peek-photo" src="' + config.envelopePeekImage + '" alt="">'
@@ -182,6 +186,7 @@
     $('c-p').textContent = 'Swipe down across the cake, top to bottom.';
     $('w-h').textContent = 'Close your eyes...';
     $('w-p').textContent = 'Make a little wish for the year ahead.';
+    $('bearA').innerHTML = wishArt('before');
     clearInterval(letterTimer);
     $('paper').textContent = '';
     $('b5').classList.add('hide');
@@ -243,6 +248,7 @@
   $('b4').onclick = function () {
     $('w-h').textContent = 'Your wish is on its way \u2728';
     $('w-p').textContent = 'Somewhere, a tiny star just said yes.';
+    $('bearA').innerHTML = wishArt('made');
     $('wishstar').classList.add('go');
     burst(60);
     this.disabled = true;

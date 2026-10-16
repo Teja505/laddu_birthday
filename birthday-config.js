@@ -24,6 +24,14 @@ window.BIRTHDAY_CONFIG = {
   // Leave empty to use the default bear + "This is for you" card instead.
   envelopePeekImage: "photos/teja.png",
 
+  // Optional: photo shown on the "Close your eyes..." wish screen before the wish is made.
+  // Leave empty to use the default bear illustration.
+  wishImage: "photos/close your eyes .png",
+
+  // Optional: photo shown on the wish screen after the wish is made ("Your wish is on its way...").
+  // Leave empty to keep showing wishImage (or the default bear illustration).
+  wishMadeImage: "photos/made a wish.png",
+
   // Optional: custom cake image, e.g. "photos/cake.png". Used for the cuttable cake and the small wish-screen icon.
   // Leave empty to use the built-in default illustration.
   cakeImage: ""
