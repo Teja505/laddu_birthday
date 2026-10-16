@@ -5,6 +5,7 @@
 
   var DEFAULT_LETTER = "Dear {n},\n\nHappy Birthday to someone truly special! \uD83C\uDF82\n\nYou are sweet, loyal, my rock, and I'm so grateful to have you in my life.\n\nYou bring so much warmth and sweetness into my life. Every moment with you is precious.\n\nOn your special day, I wish you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful moments and wonderful memories.\n\nHere's to celebrating you today and always! \uD83C\uDF89\n\nWith love and best wishes,\n{f}";
   var DEFAULT_FINAL = "Once again, Happy Birthday {n}! Hope you loved your surprise.";
+  var DEFAULT_FINALE_SVG = '<svg width="170" height="130" viewBox="0 0 170 130" aria-hidden="true"><circle cx="55" cy="72" r="38" fill="#fff" stroke="#eee"/><ellipse cx="42" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><ellipse cx="68" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><circle cx="44" cy="70" r="3" fill="#333"/><circle cx="66" cy="70" r="3" fill="#333"/><circle cx="55" cy="80" r="3" fill="#8d6af5"/><circle cx="125" cy="76" r="38" fill="#a9703f"/><circle cx="100" cy="46" r="12" fill="#a9703f"/><circle cx="150" cy="46" r="12" fill="#a9703f"/><circle cx="114" cy="72" r="3" fill="#222"/><circle cx="136" cy="72" r="3" fill="#222"/><ellipse cx="125" cy="84" rx="12" ry="9" fill="#e4c29c"/><circle cx="125" cy="81" r="3" fill="#222"/></svg>';
 
   var D = {
     name: config.theirName || 'Archi',
@@ -13,16 +14,6 @@
     photos: Array.isArray(config.photos) ? config.photos.slice(0, 8) : [],
     captions: Array.isArray(config.photoCaptions) ? config.photoCaptions : []
   };
-
-  // shared-link override
-  try {
-    if (location.hash.length > 2) {
-      var q = JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))));
-      if (q.n) D.name = q.n;
-      if (q.f) D.from = q.f;
-      if (q.m) D.msg = q.m;
-    }
-  } catch (e) { /* ignore malformed hash */ }
 
   if (!D.msg) {
     var letterTemplate = config.letter || DEFAULT_LETTER;
@@ -129,6 +120,9 @@
     var finalTemplate = config.finalMessage || DEFAULT_FINAL;
     $('fnl').textContent = finalTemplate.replace('{n}', D.name);
     $('letter').dataset.raw = D.msg;
+    $('fin').innerHTML = config.finaleImage
+      ? '<img src="' + config.finaleImage + '" alt="">'
+      : DEFAULT_FINALE_SVG;
   }
   initText();
 
@@ -347,15 +341,6 @@
     $('gift').classList.remove('open');
   }
   $('again').onclick = function () { resetAll(); go('cover'); };
-  $('share').onclick = function () {
-    var payload = { n: D.name, f: D.from, m: D.msg };
-    var link = location.href.split('#')[0] + '#' + btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-    (navigator.clipboard ? navigator.clipboard.writeText(link) : Promise.reject()).then(function () {
-      $('share').textContent = 'Link copied';
-    }, function () {
-      prompt('Copy this link', link);
-    });
-  };
 
   buildSky();
 })();

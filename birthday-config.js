@@ -17,5 +17,9 @@ window.BIRTHDAY_CONFIG = {
   photos: [],
 
   // Optional: one caption per photo, in the same order as "photos" above.
-  photoCaptions: []
+  photoCaptions: [],
+
+  // Optional: image shown on the final screen, e.g. "photos/finale.png".
+  // Leave empty to use the built-in default illustration.
+  finaleImage: ""
 };

@@ -131,5 +131,6 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
 @keyframes ln-in{to{opacity:1;transform:none}}
 
 .fin{background:var(--card);border-radius:18px;padding:18px 22px;box-shadow:0 12px 28px var(--shadow)}
+.fin img{display:block;max-width:min(220px,70vw);max-height:30vh;border-radius:12px;object-fit:cover}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
