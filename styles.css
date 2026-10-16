@@ -44,12 +44,12 @@ h1 em,h2 em{color:var(--rose);font-style:normal;font-weight:700}
 .split-heading .line2{
   background:linear-gradient(90deg,#5c2a52,#c81457 50%,#5c2a52);
   background-size:200% auto;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;font-style:italic;
+  -webkit-text-fill-color:transparent;color:transparent;
   animation:shimmer 6s linear infinite reverse
 }
 .split-heading .line2 em{
   background:none;-webkit-background-clip:border-box;background-clip:border-box;
-  -webkit-text-fill-color:#9c0f45;color:#9c0f45;font-style:normal;font-weight:800
+  -webkit-text-fill-color:#9c0f45;color:#9c0f45;font-style:italic;font-weight:700
 }
 
 button{font:700 1rem Quicksand,system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,var(--grad1),var(--btn));border:0;border-radius:999px;
