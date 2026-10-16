@@ -40,6 +40,9 @@ h1 em,h2 em{color:var(--rose);font-style:normal;font-weight:700}
   animation:shimmer 5s linear infinite
 }
 @keyframes shimmer{to{background-position:-220% center}}
+.split-heading{display:flex;flex-direction:column;align-items:center;gap:.15em}
+.split-heading .line2{color:var(--gold);font-style:italic}
+.split-heading .line2 em{color:var(--rose)}
 
 button{font:700 1rem Quicksand,system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,var(--grad1),var(--btn));border:0;border-radius:999px;
   position:relative;overflow:hidden;letter-spacing:.3px;
