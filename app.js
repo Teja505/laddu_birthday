@@ -23,9 +23,14 @@
   var cur = 'cover';
 
   function go(id) {
-    document.querySelector('.scene.on').classList.remove('on');
-    $(id).classList.add('on');
+    var current = document.querySelector('.scene.on');
+    var next = $(id);
     cur = id;
+    next.classList.add('on');
+    if (current && current !== next) {
+      current.classList.add('leaving');
+      setTimeout(function () { current.classList.remove('on', 'leaving'); }, 550);
+    }
     if (id === 's2') mic();
     if (id === 's3') balloons();
     if (id === 's4') bouquet();
@@ -155,7 +160,10 @@
     $('bl').textContent = 'Make a wish \u2728';
     if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
     burst(120);
-    setTimeout(function () { go('s3'); }, 2200);
+    var r = $('cw').getBoundingClientRect();
+    emojiBurst(6, r.left + r.width / 2, r.top, ['\u2728', '\uD83D\uDCAB', '\uD83C\uDF20']);
+    setTimeout(function () { $('bl').textContent = 'Your wish is on its way... \uD83D\uDCAB'; }, 1200);
+    setTimeout(function () { go('s3'); }, 2600);
   }
   $('cw').onclick = out;
   function mic() {
