@@ -185,7 +185,7 @@
     $('ln').textContent = D.name;
     $('fn').textContent = D.name;
     $('wish').textContent = D.wish;
-    $('sig').textContent = '\u2014 with love, ' + D.from;
+    $('sig').textContent = '\u2014 with love, ' + D.from + '? \uD83D\uDC95';
     $('cakebox').classList.remove('cut');
     $('cakeStage').classList.remove('blown');
     $('cutAnyway').classList.add('hide');
