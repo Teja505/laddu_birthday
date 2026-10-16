@@ -198,6 +198,7 @@
     $('b2').disabled = false;
     $('b4').disabled = false;
     $('noBtn').style.left = ''; $('noBtn').style.right = '0'; $('noBtn').style.top = '';
+    $('bgm').pause(); $('bgm').currentTime = 0;
   }
   setup();
   playEnvelopePeek();
@@ -249,6 +250,7 @@
     blown = true;
     stopMic();
     cakeStage.classList.add('blown');
+    $('bgm').play().catch(function () { /* autoplay blocked, ignore */ });
     burst(70);
     var r = cakebox.getBoundingClientRect();
     emojiBurst(5, r.left + r.width / 2, r.top, ['\u2728', '\uD83D\uDCA8']);
