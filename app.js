@@ -97,6 +97,7 @@
       $('sleepy').classList.remove('hide');
     }
     if (id === 's3') startMic(); else stopMic();
+    if (id === 'sBalloons') balloons();
   }
 
   function playEnvelopePeek() {
@@ -331,12 +332,48 @@
       $('b5').classList.remove('hide');
     };
   }
-  $('b5').onclick = function () {
-    document.body.className = 'pink';
-    go('s6');
-    burst(160);
-    emojiBurst(10, innerWidth / 2, innerHeight, ['\u2764', '\uD83C\uDF89', '\u2728']);
-  };
+  $('b5').onclick = function () { go('sBalloons'); };
+
+  /* ---------- sBalloons: pop to reveal memories ---------- */
+  var BALLOON_COLORS = ['#d7c7ff', '#c3f0d9', '#d9d0ff', '#f9d56e'];
+  var DEFAULT_BALLOON_IMAGES = ['photos/teja.png', 'photos/close your eyes .png', 'photos/made a wish.png', 'photos/cute laddu.png'];
+  function balloons() {
+    var field = $('bfield'), popped = 0;
+    field.innerHTML = ''; $('chips').innerHTML = '';
+    var positions = [[6, 8], [62, 2], [30, 44], [70, 56]];
+    var images = (Array.isArray(config.balloonImages) && config.balloonImages.length) ? config.balloonImages : DEFAULT_BALLOON_IMAGES;
+    for (var i = 0; i < 4; i++) {
+      (function (i) {
+        var b = document.createElement('button');
+        b.className = 'bal';
+        b.setAttribute('aria-label', 'Pop balloon ' + (i + 1));
+        b.style.left = positions[i][0] + '%';
+        b.style.top = positions[i][1] + '%';
+        b.style.animationDelay = (i * .4) + 's';
+        b.innerHTML = '<svg viewBox="0 0 84 120"><ellipse cx="42" cy="44" rx="34" ry="40" fill="' + BALLOON_COLORS[i] + '" opacity=".88"/><ellipse cx="30" cy="30" rx="8" ry="14" fill="#fff" opacity=".5"/><path d="M42 84 l-5 8 h10z" fill="' + BALLOON_COLORS[i] + '"/><path d="M42 92 q-10 12 0 28" stroke="' + '#d9587c' + '" fill="none" stroke-width="2"/></svg>';
+        b.onclick = function () {
+          b.classList.add('pop'); b.disabled = true;
+          var r = b.getBoundingClientRect();
+          burst(30, r.left + 42, r.top + 40);
+          emojiBurst(4, r.left + 42, r.top + 40, ['\u2728', '\uD83C\uDF88']);
+          var chip = document.createElement('div');
+          chip.className = 'chip';
+          chip.innerHTML = '<img src="' + images[i % images.length] + '" alt="">';
+          $('chips').appendChild(chip);
+          popped++;
+          if (popped === 4) {
+            setTimeout(function () {
+              document.body.className = 'pink';
+              go('s6');
+              burst(160);
+              emojiBurst(10, innerWidth / 2, innerHeight, ['\u2764', '\uD83C\uDF89', '\u2728']);
+            }, 1400);
+          }
+        };
+        field.appendChild(b);
+      })(i);
+    }
+  }
 
   $('again').onclick = function () { setup(); go('s1'); };
 })();
