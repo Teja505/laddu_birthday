@@ -16,9 +16,13 @@ window.BIRTHDAY_CONFIG = {
   // Leave empty to use the built-in default illustration.
   envelopeImage: "",
 
-  // Optional: custom character image used for the mascot (corner peek, wish screen, finale), e.g. "photos/mascot.png".
+  // Optional: custom character image used for the mascot (corner peek, wish screen), e.g. "photos/mascot.png".
   // Leave empty to use the built-in default bear illustration.
   mascotImage: "",
+
+  // Optional: photo shown on the final "Happy Birthday" screen, e.g. "photos/cute laddu.png".
+  // Leave empty to use the default bear illustration.
+  finaleImage: "photos/cute laddu.png",
 
   // Optional: photo that pops out of the envelope on the landing screen, e.g. "photos/teja.png".
   // Leave empty to use the default bear + "This is for you" card instead.

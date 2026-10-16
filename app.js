@@ -68,7 +68,7 @@
   }
 
   $('sleepy').innerHTML = bear({ sleep: 1 });
-  $('bearF').innerHTML = bear({ balloon: 1 });
+  $('bearF').innerHTML = config.finaleImage ? '<img src="' + config.finaleImage + '" alt="">' : bear({ balloon: 1 });
   $('envPeek').innerHTML = config.envelopePeekImage
     ? '<img class="env-peek-photo" src="' + config.envelopePeekImage + '" alt="">'
     : '<div class="env-bear">' + bear({}) + '</div><div class="env-card">This is for you, <em>' + D.name + '</em>!</div>';
