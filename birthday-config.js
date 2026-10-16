@@ -21,5 +21,9 @@ window.BIRTHDAY_CONFIG = {
 
   // Optional: image shown on the final screen, e.g. "photos/finale.png".
   // Leave empty to use the built-in default illustration.
-  finaleImage: ""
+  finaleImage: "",
+
+  // Optional: image shown on the cake screen, e.g. "photos/cake.png".
+  // Leave empty to use the built-in default illustration.
+  cakeImage: ""
 };

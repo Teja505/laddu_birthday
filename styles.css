@@ -76,6 +76,8 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
 
 /* cake */
 .cake{width:min(300px,78vw)}
+.cake svg{width:100%;display:block}
+.cake img{width:100%;display:block;border-radius:16px;box-shadow:0 14px 28px var(--shadow)}
 
 /* candle */
 .cwrap{position:relative;width:200px;height:220px;display:flex;align-items:center;justify-content:center}

@@ -6,6 +6,13 @@
   var DEFAULT_LETTER = "Dear {n},\n\nHappy Birthday to someone truly special! \uD83C\uDF82\n\nYou are sweet, loyal, my rock, and I'm so grateful to have you in my life.\n\nYou bring so much warmth and sweetness into my life. Every moment with you is precious.\n\nOn your special day, I wish you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful moments and wonderful memories.\n\nHere's to celebrating you today and always! \uD83C\uDF89\n\nWith love and best wishes,\n{f}";
   var DEFAULT_FINAL = "Once again, Happy Birthday {n}! Hope you loved your surprise.";
   var DEFAULT_FINALE_SVG = '<svg width="170" height="130" viewBox="0 0 170 130" aria-hidden="true"><circle cx="55" cy="72" r="38" fill="#fff" stroke="#eee"/><ellipse cx="42" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><ellipse cx="68" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><circle cx="44" cy="70" r="3" fill="#333"/><circle cx="66" cy="70" r="3" fill="#333"/><circle cx="55" cy="80" r="3" fill="#8d6af5"/><circle cx="125" cy="76" r="38" fill="#a9703f"/><circle cx="100" cy="46" r="12" fill="#a9703f"/><circle cx="150" cy="46" r="12" fill="#a9703f"/><circle cx="114" cy="72" r="3" fill="#222"/><circle cx="136" cy="72" r="3" fill="#222"/><ellipse cx="125" cy="84" rx="12" ry="9" fill="#e4c29c"/><circle cx="125" cy="81" r="3" fill="#222"/></svg>';
+  var DEFAULT_CAKE_SVG = '<svg viewBox="0 0 300 200" aria-hidden="true">' +
+    '<path d="M20 30 L280 30" stroke="currentColor" stroke-width="2" fill="none" opacity=".5"/>' +
+    '<path d="M20 30 l16 0 l-8 22z" fill="#c7b8ff"/><path d="M52.5 30 l16 0 l-8 22z" fill="#f9d56e"/><path d="M85 30 l16 0 l-8 22z" fill="#9be4d0"/><path d="M117.5 30 l16 0 l-8 22z" fill="#b9a6f0"/><path d="M150 30 l16 0 l-8 22z" fill="#c7b8ff"/><path d="M182.5 30 l16 0 l-8 22z" fill="#f9d56e"/><path d="M215 30 l16 0 l-8 22z" fill="#9be4d0"/><path d="M247.5 30 l16 0 l-8 22z" fill="#b9a6f0"/>' +
+    '<ellipse cx="95" cy="120" rx="42" ry="38" fill="#c98f6b"/><circle cx="66" cy="90" r="14" fill="#c98f6b"/><circle cx="124" cy="90" r="14" fill="#c98f6b"/><ellipse cx="95" cy="128" rx="24" ry="18" fill="#f5dcc4"/><circle cx="82" cy="112" r="3.5" fill="#3b2a2a"/><circle cx="108" cy="112" r="3.5" fill="#3b2a2a"/><ellipse cx="95" cy="121" rx="5" ry="3.5" fill="#3b2a2a"/><circle cx="72" cy="124" r="6" fill="#f2b6d1" opacity=".8"/><circle cx="118" cy="124" r="6" fill="#f2b6d1" opacity=".8"/>' +
+    '<ellipse cx="215" cy="120" rx="42" ry="38" fill="#fff"/><circle cx="186" cy="90" r="14" fill="#2f2a2a"/><circle cx="244" cy="90" r="14" fill="#2f2a2a"/><ellipse cx="200" cy="114" rx="9" ry="11" fill="#2f2a2a"/><ellipse cx="230" cy="114" rx="9" ry="11" fill="#2f2a2a"/><circle cx="201" cy="113" r="3" fill="#fff"/><circle cx="231" cy="113" r="3" fill="#fff"/><ellipse cx="215" cy="126" rx="4" ry="3" fill="#2f2a2a"/><circle cx="190" cy="128" r="6" fill="#f2b6d1" opacity=".8"/><circle cx="240" cy="128" r="6" fill="#f2b6d1" opacity=".8"/>' +
+    '<rect x="95" y="140" width="120" height="48" rx="8" fill="#f9d56e"/><rect x="95" y="140" width="120" height="14" rx="7" fill="#fff"/><rect x="95" y="134" width="120" height="12" rx="6" fill="#9a7af4"/><text x="155" y="176" text-anchor="middle" font-size="14" font-weight="700" fill="#6d3ad6" font-family="Inter,sans-serif">HAPPY BDAY</text>' +
+    '<rect x="152" y="112" width="6" height="24" fill="#9a7af4"/><ellipse cx="155" cy="106" rx="5" ry="9" fill="#ffb347"/></svg>';
 
   var D = {
     name: config.theirName || 'Archi',
@@ -119,15 +126,15 @@
   function initText() {
     $('t1').textContent = 'Happy Birthday, ' + D.name;
     $('t2').textContent = 'Blow the candle, ' + D.name;
-    $('flags').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7].map(function (i) {
-      return '<path d="M' + (20 + i * 32.5) + ' 30 l16 0 l-8 22z" fill="' + ['#c7b8ff', '#f9d56e', '#9be4d0', '#b9a6f0'][i % 4] + '"/>';
-    }).join('');
     var finalTemplate = config.finalMessage || DEFAULT_FINAL;
     $('fnl').textContent = finalTemplate.replace('{n}', D.name);
     $('letter').dataset.raw = D.msg;
     $('fin').innerHTML = config.finaleImage
       ? '<img src="' + config.finaleImage + '" alt="">'
       : DEFAULT_FINALE_SVG;
+    $('cake').innerHTML = config.cakeImage
+      ? '<img src="' + config.cakeImage + '" alt="">'
+      : DEFAULT_CAKE_SVG;
   }
   initText();
 
