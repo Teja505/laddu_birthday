@@ -3,103 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#2a1a4a">
-<title>A Birthday Surprise 🎂</title>
-<meta name="description" content="A little interactive birthday surprise, made with love.">
-<meta property="og:title" content="A Birthday Surprise 🎂">
-<meta property="og:description" content="Tap to unwrap a birthday surprise made just for you.">
+<meta name="theme-color" content="#fbf3ea">
+<title>A tiny birthday surprise</title>
+<meta name="description" content="A tiny interactive birthday surprise, made with love.">
+<meta property="og:title" content="A tiny birthday surprise">
+<meta property="og:description" content="A tiny interactive birthday surprise, made just for you.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@500;600&family=Inter:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Caveat:wght@600&family=Inter:wght@500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="stars" id="stars" aria-hidden="true"></div>
+<div class="rays" aria-hidden="true"></div>
+<svg class="bunting" viewBox="0 0 400 50" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 Q200 40 400 4" stroke="#b8946a" fill="none" stroke-width="2"/><g id="flags"></g></svg>
+<div class="sleepy" id="sleepy" aria-hidden="true"></div>
 <canvas id="cv"></canvas>
-<div id="sky" aria-hidden="true"></div>
 <div id="wishstar" class="wishstar" aria-hidden="true">⭐</div>
 
-<section class="scene on" id="cover">
-  <div class="giftwrap" id="gift">
-    <svg viewBox="0 0 220 220" class="gift-svg" aria-hidden="true">
-      <rect x="30" y="95" width="160" height="105" rx="10" fill="var(--box)"/>
-      <rect x="30" y="95" width="160" height="30" fill="var(--box2)"/>
-      <rect x="96" y="95" width="28" height="105" fill="var(--ribbon)"/>
-      <rect x="30" y="95" width="160" height="105" fill="none"/>
-      <g class="gift-lid">
-        <rect x="20" y="70" width="180" height="34" rx="10" fill="var(--box2)"/>
-        <rect x="96" y="70" width="28" height="34" fill="var(--ribbon)"/>
-        <path class="bow" d="M110 70 C70 70 70 20 110 40 C150 20 150 70 110 70Z" fill="var(--ribbon)"/>
-        <circle cx="110" cy="58" r="10" fill="var(--ribbon-dark)"/>
-      </g>
-    </svg>
-    <div class="sparkles" aria-hidden="true">
-      <span>✨</span><span>✨</span><span>✨</span><span>✨</span>
-    </div>
-  </div>
-  <h1 class="cover-title">A surprise is waiting</h1>
-  <p class="sub">Tap the gift to open it</p>
+<section class="scene on" id="s1">
+  <span class="tag">a little something ✦</span>
+  <h1>There's something <em>for you</em></h1>
+  <p class="sub">A tiny birthday surprise, made just for you.</p>
+  <div class="env-wrap" id="env"></div>
+  <button id="b1">Open your surprise ♥</button>
 </section>
 
-<section class="scene" id="s1">
-  <h1 id="t1"></h1>
-  <div class="cake" id="cake"></div>
-  <p class="sub">Are you excited for what's next?</p>
-  <div class="row"><button id="yes" style="left:0">Yes</button><button id="no" class="ghost" style="right:0">No</button></div>
-</section>
-
-<section class="scene" id="s2">
-  <h2 id="t2"></h2>
-  <div class="cwrap" id="cw">
-    <div class="glow"></div>
-    <svg viewBox="0 0 200 220" width="200" height="220" aria-hidden="true">
-      <rect x="30" y="150" width="140" height="60" rx="10" fill="#c7b8ff"/><rect x="30" y="150" width="140" height="18" rx="9" fill="#fff"/>
-      <rect x="94" y="100" width="12" height="52" rx="3" fill="#f9d56e"/><rect x="94" y="100" width="12" height="8" fill="#fff"/>
-      <g class="flame"><path d="M100 60 C112 78 112 92 100 98 C88 92 88 78 100 60Z" fill="#ffb347"/><path d="M100 76 C106 86 106 92 100 96 C94 92 94 86 100 76Z" fill="#fff3b0"/></g>
-      <path class="smoke" d="M100 90 q-8 -14 0 -26 q8 -12 0 -24" stroke="#bbb" stroke-width="3" fill="none"/>
-    </svg>
-  </div>
-  <p class="sub" id="bl">Blow into the mic, or just tap the candle.</p>
+<section class="scene" id="night">
+  <span class="tag">Shhh...</span>
+  <h1>The room is<br>waiting for you.</h1>
+  <p class="sub">Someone left the lights off on purpose.</p>
+  <button id="b2">Turn on the lights</button>
 </section>
 
 <section class="scene" id="s3">
-  <h2>Pop all 4 balloons</h2>
-  <div id="bfield"></div>
-  <div id="chips"></div>
+  <span class="tag" id="c-tag">Cake time</span>
+  <h2 id="c-h">Make the first cut ✨</h2>
+  <p class="sub" id="c-p">Swipe down across the cake, top to bottom.</p>
+  <div id="cakebox" tabindex="0">
+    <div id="knife"></div>
+    <div class="cake-stage">
+      <div id="hl" class="cake-half cake-left"></div>
+      <div id="hr" class="cake-half cake-right"></div>
+    </div>
+  </div>
+  <button id="b3" class="hide">Make a wish ✨</button>
 </section>
 
 <section class="scene" id="s4">
-  <h2>Your Rose Bouquet 🌹</h2>
-  <svg id="bq" viewBox="0 0 300 300" role="img" aria-label="Rose bouquet"></svg>
-  <p class="sub">Tap the bouquet.</p>
-  <button id="n4" class="next-btn">Next</button>
+  <div class="pair">
+    <div id="bearA" class="mascot-sm"></div>
+    <div id="cakeB" class="mascot-sm"></div>
+  </div>
+  <h2 id="w-h">Close your eyes...</h2>
+  <p class="sub" id="w-p">Make a little wish for the year ahead.</p>
+  <button id="b4">I made my wish ✨</button>
 </section>
 
 <section class="scene" id="s5">
-  <h2>Some Sweet Moments</h2>
-  <p class="sub">Swipe the cards</p>
-  <div id="stack"></div>
-  <button id="n5" class="next-btn">Next</button>
+  <h2>For you, <em id="ln"></em></h2>
+  <div id="paper"></div>
+  <button id="b5" class="hide">Continue</button>
 </section>
 
 <section class="scene" id="s6">
-  <h2>A Message From My Heart</h2>
-  <p class="sub" id="tap">Tap the envelope to open</p>
-  <div id="env">
-    <div class="back"></div>
-    <div class="flap"></div>
-    <div class="front"></div>
-    <div class="seal">❤</div>
-  </div>
-  <div id="letter"></div>
-  <button id="more" class="next-btn">One last surprise</button>
-</section>
-
-<section class="scene" id="s7">
-  <div class="fin" id="fin"></div>
-  <h2>Lots of love for you ❤</h2>
-  <p class="sub" id="fnl"></p>
-  <button id="again" class="ghost">Replay</button>
+  <div id="bearF" class="mascot-lg"></div>
+  <h1>Happy Birthday, <em id="fn"></em>! 🎂</h1>
+  <p class="sub" id="wish"></p>
+  <p class="sub" id="sig"></p>
+  <button id="again" class="ghost">Replay the surprise ↻</button>
 </section>
 
 <script src="birthday-config.js"></script>

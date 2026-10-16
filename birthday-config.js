@@ -3,27 +3,24 @@ window.BIRTHDAY_CONFIG = {
   // The birthday person's name
   theirName: "Laddu",
 
-  // Your name, shown at the end of the letter
+  // Your name, shown in the signature on the final screen
   yourName: "Your Special Someone",
 
-  // The letter shown in the envelope scene. Use {n} for their name and {f} for your name.
-  letter: "Dear {n},\n\nHappy Birthday to someone truly special! 🎂\n\nYou are sweet, loyal, my rock, and I'm so grateful to have you in my life.\n\nYou bring so much warmth and sweetness into my life. Every moment with you is precious.\n\nOn your special day, I wish you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful moments and wonderful memories.\n\nHere's to celebrating you today and always! 🎉\n\nWith love and best wishes,\n{f}",
+  // A short wish shown on the final screen
+  wish: "May this year bring you countless little reasons to smile.",
 
-  // Message shown on the very last screen. Use {n} for their name.
-  finalMessage: "Once again, Happy Birthday {n}! Hope you loved your surprise.",
+  // The letter revealed on the typewriter screen. Use blank lines for paragraph breaks.
+  letter: "I wanted to make you something small, but with a lot of love inside it.\n\nYou make ordinary days feel softer and brighter just by being in them. Thank you for being exactly who you are.\n\nWhatever you wished for tonight, I hope it finds its way to you.\n\nHappy birthday. I'm so glad you exist.",
 
-  // Optional: photo paths for the swipe-card scene, e.g. "photos/1.jpg".
-  // Add image files to a "photos" folder next to index.html and list them here.
-  photos: [],
-
-  // Optional: one caption per photo, in the same order as "photos" above.
-  photoCaptions: [],
-
-  // Optional: image shown on the final screen, e.g. "photos/finale.png".
+  // Optional: custom envelope image, e.g. "photos/envelope.png".
   // Leave empty to use the built-in default illustration.
-  finaleImage: "",
+  envelopeImage: "",
 
-  // Optional: image shown on the cake screen, e.g. "photos/cake.png".
+  // Optional: custom character image used for the mascot (corner peek, wish screen, finale), e.g. "photos/mascot.png".
+  // Leave empty to use the built-in default bear illustration.
+  mascotImage: "",
+
+  // Optional: custom cake image, e.g. "photos/cake.png". Used for the cuttable cake and the small wish-screen icon.
   // Leave empty to use the built-in default illustration.
   cakeImage: ""
 };

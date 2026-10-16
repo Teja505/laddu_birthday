@@ -3,40 +3,76 @@
   var config = window.BIRTHDAY_CONFIG || {};
   var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var DEFAULT_LETTER = "Dear {n},\n\nHappy Birthday to someone truly special! \uD83C\uDF82\n\nYou are sweet, loyal, my rock, and I'm so grateful to have you in my life.\n\nYou bring so much warmth and sweetness into my life. Every moment with you is precious.\n\nOn your special day, I wish you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful moments and wonderful memories.\n\nHere's to celebrating you today and always! \uD83C\uDF89\n\nWith love and best wishes,\n{f}";
-  var DEFAULT_FINAL = "Once again, Happy Birthday {n}! Hope you loved your surprise.";
-  var DEFAULT_FINALE_SVG = '<svg viewBox="0 0 160 190" aria-hidden="true">' +
-    '<ellipse cx="80" cy="140" rx="46" ry="44" fill="#e0a45c"/><ellipse cx="80" cy="150" rx="28" ry="28" fill="#f5d9a8"/>' +
-    '<circle cx="42" cy="58" r="17" fill="#e0a45c"/><circle cx="118" cy="58" r="17" fill="#e0a45c"/><circle cx="42" cy="58" r="8" fill="#f2b9a0"/><circle cx="118" cy="58" r="8" fill="#f2b9a0"/>' +
-    '<circle cx="80" cy="82" r="44" fill="#e8b068"/><ellipse cx="80" cy="98" rx="20" ry="15" fill="#f5d9a8"/><ellipse cx="80" cy="92" rx="6" ry="4.5" fill="#4a2c2c"/>' +
-    '<circle cx="62" cy="76" r="5" fill="#4a2c2c"/><circle cx="98" cy="76" r="5" fill="#4a2c2c"/><circle cx="64" cy="74" r="1.8" fill="#fff"/><circle cx="100" cy="74" r="1.8" fill="#fff"/>' +
-    '<path d="M72 102 q8 8 16 0" stroke="#4a2c2c" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="52" cy="92" r="7" fill="#f4a3a3" opacity=".7"/><circle cx="108" cy="92" r="7" fill="#f4a3a3" opacity=".7"/>' +
-    '<path d="M62 42 L80 6 L98 42z" fill="#a98ad0"/><circle cx="80" cy="6" r="6" fill="#f9d56e"/><path d="M68 34 h24" stroke="#fff" stroke-width="3"/>' +
-    '<path d="M122 120 Q140 80 132 40" stroke="#b8284f" stroke-width="2" fill="none"/><ellipse cx="132" cy="28" rx="16" ry="20" fill="#f08aa6"/><ellipse cx="127" cy="22" rx="4" ry="7" fill="#fff" opacity=".5"/><circle cx="118" cy="128" r="11" fill="#e8b068"/></svg>';
-  var DEFAULT_CAKE_SVG = '<svg viewBox="0 0 300 200" aria-hidden="true">' +
-    '<path d="M20 30 L280 30" stroke="currentColor" stroke-width="2" fill="none" opacity=".5"/>' +
-    '<path d="M20 30 l16 0 l-8 22z" fill="#c7b8ff"/><path d="M52.5 30 l16 0 l-8 22z" fill="#f9d56e"/><path d="M85 30 l16 0 l-8 22z" fill="#9be4d0"/><path d="M117.5 30 l16 0 l-8 22z" fill="#b9a6f0"/><path d="M150 30 l16 0 l-8 22z" fill="#c7b8ff"/><path d="M182.5 30 l16 0 l-8 22z" fill="#f9d56e"/><path d="M215 30 l16 0 l-8 22z" fill="#9be4d0"/><path d="M247.5 30 l16 0 l-8 22z" fill="#b9a6f0"/>' +
-    '<ellipse cx="95" cy="120" rx="42" ry="38" fill="#c98f6b"/><circle cx="66" cy="90" r="14" fill="#c98f6b"/><circle cx="124" cy="90" r="14" fill="#c98f6b"/><ellipse cx="95" cy="128" rx="24" ry="18" fill="#f5dcc4"/><circle cx="82" cy="112" r="3.5" fill="#3b2a2a"/><circle cx="108" cy="112" r="3.5" fill="#3b2a2a"/><ellipse cx="95" cy="121" rx="5" ry="3.5" fill="#3b2a2a"/><circle cx="72" cy="124" r="6" fill="#f2b6d1" opacity=".8"/><circle cx="118" cy="124" r="6" fill="#f2b6d1" opacity=".8"/>' +
-    '<ellipse cx="215" cy="120" rx="42" ry="38" fill="#fff"/><circle cx="186" cy="90" r="14" fill="#2f2a2a"/><circle cx="244" cy="90" r="14" fill="#2f2a2a"/><ellipse cx="200" cy="114" rx="9" ry="11" fill="#2f2a2a"/><ellipse cx="230" cy="114" rx="9" ry="11" fill="#2f2a2a"/><circle cx="201" cy="113" r="3" fill="#fff"/><circle cx="231" cy="113" r="3" fill="#fff"/><ellipse cx="215" cy="126" rx="4" ry="3" fill="#2f2a2a"/><circle cx="190" cy="128" r="6" fill="#f2b6d1" opacity=".8"/><circle cx="240" cy="128" r="6" fill="#f2b6d1" opacity=".8"/>' +
-    '<rect x="95" y="140" width="120" height="48" rx="8" fill="#f9d56e"/><rect x="95" y="140" width="120" height="14" rx="7" fill="#fff"/><rect x="95" y="134" width="120" height="12" rx="6" fill="#9a7af4"/><text x="155" y="176" text-anchor="middle" font-size="14" font-weight="700" fill="#6d3ad6" font-family="Inter,sans-serif">HAPPY BDAY</text>' +
-    '<rect x="152" y="112" width="6" height="24" fill="#9a7af4"/><ellipse cx="155" cy="106" rx="5" ry="9" fill="#ffb347"/></svg>';
+  var DEFAULT_LETTER = "I wanted to make you something small, but with a lot of love inside it.\n\nYou make ordinary days feel softer and brighter just by being in them. Thank you for being exactly who you are.\n\nWhatever you wished for tonight, I hope it finds its way to you.\n\nHappy birthday. I'm so glad you exist.";
+  var DEFAULT_WISH = "May this year bring you countless little reasons to smile.";
 
   var D = {
     name: config.theirName || 'Archi',
     from: config.yourName || 'Your Special Someone',
-    msg: '',
-    photos: Array.isArray(config.photos) ? config.photos.slice(0, 8) : [],
-    captions: Array.isArray(config.photoCaptions) ? config.photoCaptions : []
+    wish: config.wish || DEFAULT_WISH,
+    msg: (config.letter || DEFAULT_LETTER).replace('{n}', config.theirName || 'Archi').replace('{f}', config.yourName || 'Your Special Someone')
   };
 
-  if (!D.msg) {
-    var letterTemplate = config.letter || DEFAULT_LETTER;
-    D.msg = letterTemplate.replace('{n}', D.name).replace('{f}', D.from);
+  /* ---------- default illustrations (used when no config image is set) ---------- */
+  var DEFAULT_ENVELOPE_SVG = '<svg viewBox="0 0 300 200" aria-hidden="true">' +
+    '<rect x="12" y="30" width="276" height="160" rx="12" fill="#efd6a8" stroke="#d1b07a" stroke-width="2"/>' +
+    '<path d="M12 42 L150 135 L288 42" fill="none" stroke="#d1b07a" stroke-width="2"/>' +
+    '<path d="M12 190 L120 110 M288 190 L180 110" stroke="#d1b07a" stroke-width="2"/>' +
+    '<path d="M12 42 Q150 -10 288 42 L150 135Z" fill="#f4e0b8" stroke="#d1b07a" stroke-width="2"/>' +
+    '<path d="M150 112 q-30 -30 -48 -10 q10 22 48 10 q38 12 48 -10 q-18 -20 -48 10z" fill="#a98ad0"/>' +
+    '<path d="M150 128 q-8 14 -20 30 M150 128 q8 14 20 30" stroke="#a98ad0" stroke-width="9" stroke-linecap="round"/>' +
+    '<path d="M150 140 c-22 -18 -14 -36 0 -26 c14 -10 22 8 0 26z" fill="#d9406b" stroke="#fff" stroke-width="2"/>' +
+    '<g stroke="#7a9a5a" fill="none" stroke-width="2"><path d="M40 170 q10 -40 8 -60"/><path d="M262 170 q-10 -40 -8 -60"/></g>' +
+    '<circle cx="48" cy="108" r="7" fill="#f08aa6"/><circle cx="254" cy="108" r="7" fill="#f08aa6"/></svg>';
+
+  var DEFAULT_CAKE_SVG = '<svg viewBox="0 0 300 260" aria-hidden="true">' +
+    '<ellipse cx="150" cy="238" rx="130" ry="14" fill="#e7e1e6"/>' +
+    '<rect x="40" y="170" width="220" height="62" rx="10" fill="#f8e7dc"/><path d="M40 176 h220 v14 q-10 14 -20 0 q-10 16 -22 0 q-10 14 -22 0 q-12 16 -24 0 q-12 14 -24 0 q-12 16 -24 0 q-12 14 -22 0 q-14 16 -22 0z" fill="#e85d8a"/>' +
+    '<rect x="62" y="116" width="176" height="56" rx="10" fill="#f6e6a0"/><rect x="62" y="150" width="176" height="14" fill="#c9b8f0"/><path d="M62 122 h176 v12 q-10 12 -22 0 q-12 14 -24 0 q-12 12 -24 0 q-12 14 -24 0 q-12 12 -24 0 q-12 14 -22 0 q-10 12 -16 0z" fill="#e85d8a"/>' +
+    '<rect x="88" y="70" width="124" height="48" rx="10" fill="#fbe9ec"/><path d="M88 76 h124 v12 q-8 12 -18 0 q-10 14 -20 0 q-10 12 -20 0 q-10 14 -20 0 q-10 12 -18 0 q-8 10 -12 0z" fill="#e85d8a"/>' +
+    '<circle cx="120" cy="62" r="7" fill="#c8202f"/><circle cx="180" cy="62" r="7" fill="#c8202f"/>' +
+    '<rect x="116" y="38" width="7" height="22" rx="2" fill="#f6a1b8"/><rect x="177" y="38" width="7" height="22" rx="2" fill="#f6a1b8"/>' +
+    '<g class="flame"><path d="M119.5 20 q7 10 0 18 q-7 -8 0 -18z" fill="#ffb347"/><path d="M180.5 20 q7 10 0 18 q-7 -8 0 -18z" fill="#ffb347"/></g></svg>';
+
+  var DEFAULT_CAKE_ICON_SVG = '<svg viewBox="0 0 160 190" aria-hidden="true">' +
+    '<ellipse cx="80" cy="176" rx="64" ry="9" fill="#e7e1e6"/><rect x="22" y="110" width="116" height="62" rx="10" fill="#f08aa6"/>' +
+    '<rect x="34" y="70" width="92" height="42" rx="9" fill="#fbe9ec"/><path d="M34 76 h92 v10 q-8 10 -16 0 q-8 12 -16 0 q-8 10 -16 0 q-8 12 -16 0 q-8 10 -12 0z" fill="#e85d8a"/>' +
+    '<circle cx="62" cy="62" r="7" fill="#c8202f"/><circle cx="98" cy="62" r="7" fill="#c8202f"/>' +
+    '<rect x="76" y="40" width="7" height="26" rx="2" fill="#f6a1b8"/><g class="flame"><path d="M79.5 20 q7 10 0 18 q-7 -8 0 -18z" fill="#ffb347"/></g></svg>';
+
+  function cakeArt(variant) {
+    if (config.cakeImage) return '<img src="' + config.cakeImage + '" alt="">';
+    return variant === 'icon' ? DEFAULT_CAKE_ICON_SVG : DEFAULT_CAKE_SVG;
   }
 
-  var cur = 'cover';
-  var activeScene = $('cover');
+  function bear(opts) {
+    if (config.mascotImage) return '<img src="' + config.mascotImage + '" alt="">';
+    opts = opts || {};
+    return '<svg viewBox="0 0 160 190" aria-hidden="true"><ellipse cx="80" cy="140" rx="46" ry="44" fill="#e0a45c"/><ellipse cx="80" cy="150" rx="28" ry="28" fill="#f5d9a8"/>' +
+      '<circle cx="42" cy="58" r="17" fill="#e0a45c"/><circle cx="118" cy="58" r="17" fill="#e0a45c"/><circle cx="42" cy="58" r="8" fill="#f2b9a0"/><circle cx="118" cy="58" r="8" fill="#f2b9a0"/>' +
+      '<circle cx="80" cy="82" r="44" fill="#e8b068"/><ellipse cx="80" cy="98" rx="20" ry="15" fill="#f5d9a8"/><ellipse cx="80" cy="92" rx="6" ry="4.5" fill="#4a2c2c"/>' +
+      (opts.sleep
+        ? '<path d="M56 78 q8 6 16 0 M88 78 q8 6 16 0" stroke="#4a2c2c" stroke-width="3" fill="none" stroke-linecap="round"/>'
+        : '<circle cx="62" cy="76" r="5" fill="#4a2c2c"/><circle cx="98" cy="76" r="5" fill="#4a2c2c"/><circle cx="64" cy="74" r="1.8" fill="#fff"/><circle cx="100" cy="74" r="1.8" fill="#fff"/>') +
+      '<path d="M72 102 q8 8 16 0" stroke="#4a2c2c" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="52" cy="92" r="7" fill="#f4a3a3" opacity=".7"/><circle cx="108" cy="92" r="7" fill="#f4a3a3" opacity=".7"/>' +
+      '<path d="M62 42 L80 6 L98 42z" fill="#a98ad0"/><circle cx="80" cy="6" r="6" fill="#f9d56e"/><path d="M68 34 h24" stroke="#fff" stroke-width="3"/>' +
+      (opts.balloon
+        ? '<path d="M122 120 Q140 80 132 40" stroke="#b8284f" stroke-width="2" fill="none"/><ellipse cx="132" cy="28" rx="16" ry="20" fill="#f08aa6"/><ellipse cx="127" cy="22" rx="4" ry="7" fill="#fff" opacity=".5"/><circle cx="118" cy="128" r="11" fill="#e8b068"/>'
+        : '<circle cx="46" cy="124" r="11" fill="#e8b068"/><circle cx="114" cy="124" r="11" fill="#e8b068"/>') +
+      '</svg>';
+  }
 
+  $('sleepy').innerHTML = bear({ sleep: 1 });
+  $('bearA').innerHTML = bear({});
+  $('bearF').innerHTML = bear({ balloon: 1 });
+  $('env').innerHTML = config.envelopeImage ? '<img src="' + config.envelopeImage + '" alt="">' : DEFAULT_ENVELOPE_SVG;
+  $('hl').innerHTML = cakeArt('full');
+  $('hr').innerHTML = cakeArt('full');
+  $('cakeB').innerHTML = cakeArt('icon');
+
+  /* ---------- scene switching with crossfade ---------- */
+  var cur = 's1';
+  var activeScene = $('s1');
   function go(id) {
     var next = $(id);
     var prev = activeScene;
@@ -47,38 +83,22 @@
       prev.classList.add('leaving');
       setTimeout(function () { prev.classList.remove('on', 'leaving'); }, 550);
     }
-    if (id === 's2') mic();
-    if (id === 's3') balloons();
-    if (id === 's4') bouquet();
-    if (id === 's5') cards();
-    if (id === 's7') finale();
   }
 
-  /* ---------- ambient background: stars + drifting hearts ---------- */
-  function buildSky() {
-    if (reduceMotion) return;
-    var sky = $('sky'), frag = document.createDocumentFragment();
-    for (var i = 0; i < 40; i++) {
-      var s = document.createElement('div');
-      s.className = 'star';
-      var size = 2 + Math.random() * 3;
-      s.style.width = s.style.height = size + 'px';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 70 + '%';
-      s.style.animationDelay = (Math.random() * 3) + 's';
-      frag.appendChild(s);
+  /* ---------- bunting flags + night sky stars ---------- */
+  var flagColors = ['#f6c76a', '#9ed8c9', '#f4b6c8', '#b4b0ee'];
+  var flags = '';
+  for (var i = 0; i < 10; i++) {
+    flags += '<path d="M' + (i * 40 + 4) + ' ' + (14 + Math.sin(i * .63) * 10 + 8) + ' l14 0 l-7 24z" fill="' + flagColors[i % 4] + '"/>';
+  }
+  $('flags').innerHTML = flags;
+
+  if (!reduceMotion) {
+    var stars = '';
+    for (var j = 0; j < 40; j++) {
+      stars += '<i style="left:' + (Math.random() * 100) + '%;top:' + (Math.random() * 100) + '%;animation-delay:' + (Math.random() * 3) + 's"></i>';
     }
-    var emoji = ['\uD83D\uDC96', '\uD83D\uDC95', '\u2728'];
-    for (var j = 0; j < 9; j++) {
-      var d = document.createElement('span');
-      d.className = 'drift';
-      d.textContent = emoji[j % emoji.length];
-      d.style.left = Math.random() * 96 + '%';
-      d.style.animationDuration = (14 + Math.random() * 10) + 's';
-      d.style.animationDelay = (Math.random() * 12) + 's';
-      frag.appendChild(d);
-    }
-    sky.appendChild(frag);
+    $('stars').innerHTML = stars;
   }
 
   /* ---------- confetti canvas ---------- */
@@ -86,15 +106,15 @@
   function size() { cv.width = innerWidth; cv.height = innerHeight; }
   size(); addEventListener('resize', size); addEventListener('orientationchange', size);
   function burst(n, x, y) {
-    var c = ['#8d6af5', '#f9d56e', '#ff9fc3', '#fff', '#6d3ad6', '#9be4d0'];
-    for (var i = 0; i < n; i++) {
+    var c = ['#e0486f', '#f9d56e', '#f7a8b8', '#fff', '#a98ad0', '#8fd3c7'];
+    for (var k = 0; k < n; k++) {
       P.push({
         x: x == null ? Math.random() * cv.width : x,
         y: y == null ? -10 : y,
-        vx: (Math.random() - .5) * (x == null ? 2 : 9),
-        vy: x == null ? Math.random() * 2 + 1 : -Math.random() * 8,
+        vx: (Math.random() - .5) * (x == null ? 2 : 10),
+        vy: x == null ? Math.random() * 2 + 1 : -Math.random() * 9,
         w: 5 + Math.random() * 6, h: 3 + Math.random() * 5,
-        r: Math.random() * 6, c: c[i % c.length], l: 300 + Math.random() * 200
+        r: Math.random() * 6, c: c[k % c.length], l: 300 + Math.random() * 200
       });
     }
     if (!running) { running = true; tick(); }
@@ -111,7 +131,6 @@
     if (P.length) requestAnimationFrame(tick); else running = false;
   }
 
-  /* floating emoji burst (hearts/sparkles rising from a point) */
   function emojiBurst(n, x, y, emojis) {
     emojis = emojis || ['\u2764', '\u2728', '\uD83D\uDC96'];
     for (var i = 0; i < n; i++) {
@@ -131,205 +150,76 @@
     }
   }
 
-  /* ---------- cover: unwrap the gift ---------- */
-  function initText() {
-    $('t1').textContent = 'Happy Birthday, ' + D.name;
-    $('t2').textContent = 'Blow the candle, ' + D.name;
-    var finalTemplate = config.finalMessage || DEFAULT_FINAL;
-    $('fnl').textContent = finalTemplate.replace('{n}', D.name);
-    $('letter').dataset.raw = D.msg;
-    $('fin').innerHTML = config.finaleImage
-      ? '<img src="' + config.finaleImage + '" alt="">'
-      : DEFAULT_FINALE_SVG;
-    $('cake').innerHTML = config.cakeImage
-      ? '<img src="' + config.cakeImage + '" alt="">'
-      : DEFAULT_CAKE_SVG;
-  }
-  initText();
-
-  var gift = $('gift');
-  gift.addEventListener('click', function () {
-    if (gift.classList.contains('open')) return;
-    gift.classList.add('open');
-    var r = gift.getBoundingClientRect();
-    burst(90, r.left + r.width / 2, r.top + 40);
-    emojiBurst(8, r.left + r.width / 2, r.top);
-    setTimeout(function () { go('s1'); }, 650);
-  });
-
-  /* ---------- s1 ---------- */
-  $('yes').onclick = function () { burst(80); go('s2'); };
-  var no = $('no');
-  function dodge() {
-    no.style.right = 'auto';
-    no.style.left = (Math.random() * 170) + 'px';
-    no.style.top = (Math.random() * 14 - 7) + 'px';
-  }
-  no.onmouseenter = dodge; no.onclick = dodge;
-  no.ontouchstart = function (e) { e.preventDefault(); dodge(); };
-
-  /* ---------- s2: candle ---------- */
-  var stream = null;
-  function out() {
-    if ($('cw').classList.contains('out')) return;
-    $('cw').classList.add('out');
-    $('bl').textContent = 'Make a wish \u2728';
-    if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
-    burst(120);
-    var r = $('cw').getBoundingClientRect();
-    emojiBurst(6, r.left + r.width / 2, r.top, ['\u2728', '\uD83D\uDCAB', '\uD83C\uDF20']);
-    $('wishstar').classList.add('go');
-    setTimeout(function () { $('bl').textContent = 'Your wish is on its way... \uD83D\uDCAB'; }, 1200);
-    setTimeout(function () { go('s3'); }, 2600);
-  }
-  $('cw').onclick = out;
-  function mic() {
-    $('cw').classList.remove('out');
-    $('bl').textContent = 'Blow into the mic, or just tap the candle.';
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
-      stream = s;
-      var ac = new (window.AudioContext || window.webkitAudioContext)();
-      var node = ac.createMediaStreamSource(s), an = ac.createAnalyser();
-      an.fftSize = 256; node.connect(an);
-      var buf = new Uint8Array(an.frequencyBinCount), hits = 0;
-      (function loop() {
-        if (cur !== 's2' || !stream) return;
-        an.getByteFrequencyData(buf);
-        var m = 0; for (var i = 0; i < 20; i++) m += buf[i]; m /= 20;
-        hits = m > 150 ? hits + 1 : Math.max(0, hits - 1);
-        if (hits > 10) return out();
-        requestAnimationFrame(loop);
-      })();
-    }).catch(function () { /* mic unavailable, tap still works */ });
-  }
-
-  /* ---------- s3: balloons ---------- */
-  var WISHES = ['You make my world beautiful', 'Happy Birthday {n} \u2764', 'You are my favorite person', 'Make a wish!'];
-  var BALLOON_COLORS = ['#d7c7ff', '#c3f0d9', '#d9d0ff', '#f9d56e'];
-  function balloons() {
-    var field = $('bfield'), popped = 0;
-    field.innerHTML = ''; $('chips').innerHTML = '';
-    var positions = [[6, 8], [62, 2], [30, 44], [70, 56]];
-    for (var i = 0; i < 4; i++) {
-      (function (i) {
-        var b = document.createElement('button');
-        b.className = 'bal';
-        b.setAttribute('aria-label', 'Pop balloon ' + (i + 1));
-        b.style.left = positions[i][0] + '%';
-        b.style.top = positions[i][1] + '%';
-        b.style.animationDelay = (i * .4) + 's';
-        b.innerHTML = '<svg viewBox="0 0 84 120"><ellipse cx="42" cy="44" rx="34" ry="40" fill="' + BALLOON_COLORS[i] + '" opacity=".88"/><ellipse cx="30" cy="30" rx="8" ry="14" fill="#fff" opacity=".5"/><path d="M42 84 l-5 8 h10z" fill="' + BALLOON_COLORS[i] + '"/><path d="M42 92 q-10 12 0 28" stroke="#6d3ad6" fill="none" stroke-width="2"/></svg>';
-        b.onclick = function () {
-          b.classList.add('pop'); b.disabled = true;
-          var r = b.getBoundingClientRect();
-          burst(30, r.left + 42, r.top + 40);
-          emojiBurst(4, r.left + 42, r.top + 40, ['\u2728', '\uD83C\uDF88']);
-          var chip = document.createElement('div');
-          chip.className = 'chip';
-          chip.textContent = WISHES[i].replace('{n}', D.name);
-          $('chips').appendChild(chip);
-          popped++;
-          if (popped === 4) setTimeout(function () { go('s4'); }, 1800);
-        };
-        field.appendChild(b);
-      })(i);
-    }
-  }
-
-  /* ---------- s4: bouquet ---------- */
-  function bouquet() {
-    var parts = [
-      '<g stroke="#2f6f46" stroke-linecap="round" fill="none">',
-      '<path d="M150 290 L118 214" stroke-width="7"/>',
-      '<path d="M150 290 L150 198" stroke-width="7"/>',
-      '<path d="M150 290 L182 214" stroke-width="7"/>',
-      '<path d="M120 205 L140 170" stroke-width="6"/>',
-      '<path d="M180 205 L160 170" stroke-width="6"/>',
-      '<path d="M150 220 L132 180" stroke-width="6"/>',
-      '</g>',
-      '<g fill="#5fb370" opacity=".9">',
-      '<path d="M118 215 C106 200, 108 177, 130 178 C136 195, 128 209, 118 215Z"/>',
-      '<path d="M182 215 C194 200, 192 177, 170 178 C164 195, 172 209, 182 215Z"/>',
-      '<path d="M150 214 C136 198, 135 174, 155 176 C165 192, 161 205, 150 214Z"/>',
-      '<path d="M135 170 C123 154, 124 136, 141 136 C149 153, 144 164, 135 170Z"/>',
-      '<path d="M165 170 C177 154, 176 136, 159 136 C151 153, 156 164, 165 170Z"/>',
-      '</g>'
-    ];
-    var rose = function (cx, cy, scale, a, b, c) {
-      return '<g transform="translate(' + cx + ' ' + cy + ') scale(' + scale + ')">' +
-        '<path d="M0 -16 C12 -30, 30 -28, 32 -8 C35 14, 18 28, 0 30 C-18 26,-32 12,-31 -8 C-30 -23,-14 -25,0 -16Z" fill="' + a + '"/>' +
-        '<path d="M0 -28 C18 -38, 34 -34, 38 -12 C42 10, 28 22, 6 24 C-11 25,-24 7,-26 -12 C-15 -26,-8 -28,0 -28Z" fill="' + b + '" transform="rotate(20)"/>' +
-        '<path d="M0 -26 C-16 -36,-31 -30,-33 -12 C-35 8,-22 22,-4 24 C14 25,27 11,25 -10 C23 -24,12 -25,0 -26Z" fill="' + c + '" transform="rotate(-18)"/>' +
-        '<circle cx="0" cy="0" r="8" fill="#4f1b36"/></g>';
-    };
-    parts.push('<g>');
-    parts.push(rose(118, 142, 1.06, '#d53f6b', '#ef6d8f', '#b81d4d'));
-    parts.push(rose(150, 124, 1.18, '#e04d7c', '#f29ab0', '#c81d57'));
-    parts.push(rose(182, 142, 1.06, '#dd5d88', '#f7a9bd', '#b91f5e'));
-    parts.push(rose(132, 176, .92, '#d74e76', '#f4a1b7', '#b9144b'));
-    parts.push(rose(168, 176, .92, '#d64d77', '#f4a1b7', '#b9144b'));
-    parts.push('</g>');
-    $('bq').innerHTML = parts.join('');
-    $('bq').classList.remove('bloom');
-    $('n4').style.display = 'none';
-  }
-  $('bq').onclick = function () {
-    this.classList.add('bloom');
-    var r = this.getBoundingClientRect();
-    burst(60, r.left + r.width / 2, r.top + r.height / 2);
-    emojiBurst(6, r.left + r.width / 2, r.top + r.height / 3, ['\uD83C\uDF38', '\u2728']);
-    $('n4').style.display = 'inline-block';
-  };
-  $('n4').onclick = function () { go('s5'); };
-
-  /* ---------- s5: photo cards ---------- */
-  var DEFAULT_CARDS = [
-    ['\uD83C\uDF38', 'Make a wish \uD83C\uDF88'],
-    ['\uD83C\uDF82', 'Sweet as ever'],
-    ['\uD83D\uDC95', 'My favorite person'],
-    ['\u2728', 'Pure magic']
-  ];
-  function cards() {
-    var stack = $('stack');
-    stack.innerHTML = ''; $('n5').style.display = 'none';
-    var items = D.photos.length
-      ? D.photos.map(function (src, i) { return { img: src, t: D.captions[i] || 'A sweet moment' }; })
-      : DEFAULT_CARDS.map(function (c) { return { e: c[0], t: c[1] }; });
-    var moved = 0;
-    items.forEach(function (it, i) {
-      var c = document.createElement('div');
-      c.className = 'pc';
-      c.style.zIndex = items.length - i;
-      c.style.transform = 'rotate(' + ((i % 2 ? 1 : -1) * i * 2) + 'deg) translateY(' + i * 4 + 'px)';
-      c.innerHTML = '<div class="ph"' + (it.img ? ' style="background-image:url(' + it.img + ')"' : '') + '>' + (it.e || '') + '</div><div class="cp">' + it.t + '</div>';
-      var startX = 0, dragging = false;
-      c.onpointerdown = function (e) { dragging = true; startX = e.clientX; c.style.transition = 'none'; c.setPointerCapture(e.pointerId); };
-      c.onpointermove = function (e) { if (dragging) c.style.transform = 'translateX(' + (e.clientX - startX) + 'px) rotate(' + (e.clientX - startX) / 15 + 'deg)'; };
-      c.onpointerup = function (e) {
-        if (!dragging) return;
-        dragging = false; c.style.transition = '';
-        var dx = e.clientX - startX;
-        if (Math.abs(dx) > 70) {
-          c.style.transform = 'translateX(' + (dx > 0 ? 500 : -500) + 'px) rotate(' + dx / 8 + 'deg)';
-          c.style.opacity = 0;
-          moved++;
-          if (moved >= items.length) $('n5').style.display = 'inline-block';
-          burst(14, e.clientX, e.clientY);
-        } else {
-          c.style.transform = '';
-        }
-      };
-      stack.appendChild(c);
-    });
-    if (items.length < 2) $('n5').style.display = 'inline-block';
-  }
-  $('n5').onclick = function () { go('s6'); };
-
-  /* ---------- s6: envelope / letter ---------- */
+  /* ---------- flow ---------- */
   var letterTimer = null;
+  function setup() {
+    document.body.className = '';
+    $('ln').textContent = D.name;
+    $('fn').textContent = D.name;
+    $('wish').textContent = D.wish;
+    $('sig').textContent = '\u2014 with love, ' + D.from;
+    $('cakebox').classList.remove('cut');
+    $('b3').classList.add('hide');
+    $('c-tag').textContent = 'Cake time';
+    $('c-h').textContent = 'Make the first cut \u2728';
+    $('c-p').textContent = 'Swipe down across the cake, top to bottom.';
+    $('w-h').textContent = 'Close your eyes...';
+    $('w-p').textContent = 'Make a little wish for the year ahead.';
+    clearInterval(letterTimer);
+    $('paper').textContent = '';
+    $('b5').classList.add('hide');
+    $('wishstar').classList.remove('go');
+    $('b2').disabled = false;
+    $('b4').disabled = false;
+  }
+  setup();
+
+  $('b1').onclick = function () { document.body.className = 'night'; go('night'); };
+  $('b2').onclick = function () {
+    document.body.className = 'glow';
+    burst(40);
+    this.disabled = true;
+    setTimeout(function () { document.body.className = ''; go('s3'); }, 1800);
+  };
+
+  /* cut the cake: swipe down */
+  var cakebox = $('cakebox'), knife = $('knife'), startY = null, done = false;
+  cakebox.onpointerdown = function (e) { if (done) return; startY = e.clientY; cakebox.setPointerCapture(e.pointerId); };
+  cakebox.onpointermove = function (e) {
+    if (startY == null) return;
+    var h = cakebox.getBoundingClientRect().height;
+    var d = Math.max(0, Math.min(h, e.clientY - startY));
+    knife.style.height = d + 'px';
+    if (d > h * .6) cut();
+  };
+  cakebox.onpointerup = function () { if (!done) knife.style.height = '0'; startY = null; };
+  cakebox.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') cut(); };
+  function cut() {
+    if (done) return;
+    done = true; startY = null;
+    cakebox.classList.add('cut');
+    knife.style.height = '0';
+    burst(90);
+    var r = cakebox.getBoundingClientRect();
+    emojiBurst(5, r.left + r.width / 2, r.top + r.height / 2, ['\u2728', '\uD83C\uDF82']);
+    $('c-tag').textContent = 'Cake time \uD83C\uDF89';
+    $('c-h').textContent = 'You did it! \uD83C\uDF8A';
+    $('c-p').textContent = 'The first slice is always the sweetest one.';
+    $('b3').classList.remove('hide');
+  }
+  $('b3').onclick = function () { done = false; go('s4'); };
+
+  $('b4').onclick = function () {
+    $('w-h').textContent = 'Your wish is on its way \u2728';
+    $('w-p').textContent = 'Somewhere, a tiny star just said yes.';
+    $('wishstar').classList.add('go');
+    burst(60);
+    this.disabled = true;
+    setTimeout(function () { go('s5'); typeLetter(D.msg); }, 2600);
+  };
+
   function typeLetter(raw) {
-    var p = $('letter'), i = 0;
+    var p = $('paper'), i = 0;
     p.textContent = '';
     clearInterval(letterTimer);
     letterTimer = setInterval(function () {
@@ -338,47 +228,21 @@
       p.scrollTop = p.scrollHeight;
       if (i >= raw.length) {
         clearInterval(letterTimer);
-        $('more').style.display = 'inline-block';
+        $('b5').classList.remove('hide');
       }
     }, 28);
     p.onclick = function () {
       clearInterval(letterTimer);
       p.textContent = raw;
-      $('more').style.display = 'inline-block';
+      $('b5').classList.remove('hide');
     };
   }
-  $('env').onclick = function () {
-    this.classList.add('open');
-    $('tap').style.display = 'none';
-    setTimeout(function () {
-      $('env').style.display = 'none';
-      $('letter').classList.add('on');
-      typeLetter($('letter').dataset.raw || '');
-    }, 1100);
-  };
-  $('more').onclick = function () { go('s7'); };
-
-  /* ---------- s7: finale ---------- */
-  var finaleTimer = null;
-  function finale() {
+  $('b5').onclick = function () {
+    document.body.className = 'pink';
+    go('s6');
     burst(160);
     emojiBurst(10, innerWidth / 2, innerHeight, ['\u2764', '\uD83C\uDF89', '\u2728']);
-    clearInterval(finaleTimer);
-    finaleTimer = setInterval(function () {
-      if (cur !== 's7') return clearInterval(finaleTimer);
-      burst(10);
-    }, 900);
-  }
-  function resetAll() {
-    var e = $('env');
-    e.style.display = ''; e.classList.remove('open');
-    $('tap').style.display = ''; $('letter').classList.remove('on');
-    clearInterval(letterTimer); $('letter').textContent = '';
-    $('more').style.display = 'none';
-    $('gift').classList.remove('open');
-    $('wishstar').classList.remove('go');
-  }
-  $('again').onclick = function () { resetAll(); go('cover'); };
+  };
 
-  buildSky();
+  $('again').onclick = function () { setup(); go('s1'); };
 })();
