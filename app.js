@@ -96,6 +96,7 @@
     } else {
       $('sleepy').classList.remove('hide');
     }
+    if (id === 's3') startMic(); else stopMic();
   }
 
   function playEnvelopePeek() {
@@ -179,11 +180,14 @@
     $('wish').textContent = D.wish;
     $('sig').textContent = '\u2014 with love, ' + D.from;
     $('cakebox').classList.remove('cut');
-    $('cutAnyway').classList.remove('hide');
+    $('cakeStage').classList.remove('blown');
+    $('cutAnyway').classList.add('hide');
     $('b3').classList.add('hide');
     $('c-tag').textContent = 'Cake time';
-    $('c-h').textContent = 'Make the first cut \u2728';
-    $('c-p').textContent = 'Swipe down across the cake, top to bottom.';
+    $('c-h').textContent = 'Blow out the candles \u2728';
+    $('c-p').textContent = 'Tap the cake, or blow into your mic.';
+    blown = false;
+    done = false;
     $('w-h').textContent = 'Close your eyes...';
     $('w-p').textContent = 'Make a little wish for the year ahead.';
     $('bearA').innerHTML = wishArt('before');
@@ -216,20 +220,62 @@
     setTimeout(function () { document.body.className = ''; go('s3'); }, 1800);
   };
 
-  /* cut the cake: swipe down */
-  var cakebox = $('cakebox'), knife = $('knife'), startY = null, done = false;
-  cakebox.onpointerdown = function (e) { if (done) return; startY = e.clientY; cakebox.setPointerCapture(e.pointerId); };
+  /* blow out the candles, then swipe down to cut the cake */
+  var cakebox = $('cakebox'), knife = $('knife'), cakeStage = $('cakeStage'), startY = null, done = false, blown = false;
+  var micStream = null;
+  function startMic() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+      micStream = s;
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var node = ac.createMediaStreamSource(s), an = ac.createAnalyser();
+      an.fftSize = 256; node.connect(an);
+      var buf = new Uint8Array(an.frequencyBinCount), hits = 0;
+      (function loop() {
+        if (blown || cur !== 's3' || !micStream) return;
+        an.getByteFrequencyData(buf);
+        var m = 0; for (var i = 0; i < 20; i++) m += buf[i]; m /= 20;
+        hits = m > 150 ? hits + 1 : Math.max(0, hits - 1);
+        if (hits > 10) return blowOut();
+        requestAnimationFrame(loop);
+      })();
+    }).catch(function () { /* mic unavailable, tap still works */ });
+  }
+  function stopMic() {
+    if (micStream) { micStream.getTracks().forEach(function (t) { t.stop(); }); micStream = null; }
+  }
+  function blowOut() {
+    if (blown) return;
+    blown = true;
+    stopMic();
+    cakeStage.classList.add('blown');
+    burst(70);
+    var r = cakebox.getBoundingClientRect();
+    emojiBurst(5, r.left + r.width / 2, r.top, ['\u2728', '\uD83D\uDCA8']);
+    $('c-h').textContent = 'Make a wish \u2728';
+    $('c-p').textContent = '';
+    setTimeout(function () {
+      $('c-h').textContent = 'Now make the first cut \u2728';
+      $('c-p').textContent = 'Swipe down across the cake, top to bottom.';
+      $('cutAnyway').classList.remove('hide');
+    }, 1100);
+  }
+  cakebox.onpointerdown = function (e) {
+    if (!blown) return blowOut();
+    if (done) return;
+    startY = e.clientY; cakebox.setPointerCapture(e.pointerId);
+  };
   cakebox.onpointermove = function (e) {
-    if (startY == null) return;
+    if (!blown || startY == null) return;
     var h = cakebox.getBoundingClientRect().height;
     var d = Math.max(0, Math.min(h, e.clientY - startY));
     knife.style.height = d + 'px';
     if (d > h * .6) cut();
   };
-  cakebox.onpointerup = function () { if (!done) knife.style.height = '0'; startY = null; };
-  cakebox.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') cut(); };
+  cakebox.onpointerup = function () { if (blown && !done) knife.style.height = '0'; startY = null; };
+  cakebox.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { if (!blown) blowOut(); else cut(); } };
   function cut() {
-    if (done) return;
+    if (!blown || done) return;
     done = true; startY = null;
     cakebox.classList.add('cut');
     knife.style.height = '0';
