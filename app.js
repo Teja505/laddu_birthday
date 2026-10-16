@@ -5,7 +5,14 @@
 
   var DEFAULT_LETTER = "Dear {n},\n\nHappy Birthday to someone truly special! \uD83C\uDF82\n\nYou are sweet, loyal, my rock, and I'm so grateful to have you in my life.\n\nYou bring so much warmth and sweetness into my life. Every moment with you is precious.\n\nOn your special day, I wish you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful moments and wonderful memories.\n\nHere's to celebrating you today and always! \uD83C\uDF89\n\nWith love and best wishes,\n{f}";
   var DEFAULT_FINAL = "Once again, Happy Birthday {n}! Hope you loved your surprise.";
-  var DEFAULT_FINALE_SVG = '<svg width="170" height="130" viewBox="0 0 170 130" aria-hidden="true"><circle cx="55" cy="72" r="38" fill="#fff" stroke="#eee"/><ellipse cx="42" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><ellipse cx="68" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><circle cx="44" cy="70" r="3" fill="#333"/><circle cx="66" cy="70" r="3" fill="#333"/><circle cx="55" cy="80" r="3" fill="#8d6af5"/><circle cx="125" cy="76" r="38" fill="#a9703f"/><circle cx="100" cy="46" r="12" fill="#a9703f"/><circle cx="150" cy="46" r="12" fill="#a9703f"/><circle cx="114" cy="72" r="3" fill="#222"/><circle cx="136" cy="72" r="3" fill="#222"/><ellipse cx="125" cy="84" rx="12" ry="9" fill="#e4c29c"/><circle cx="125" cy="81" r="3" fill="#222"/></svg>';
+  var DEFAULT_FINALE_SVG = '<svg viewBox="0 0 160 190" aria-hidden="true">' +
+    '<ellipse cx="80" cy="140" rx="46" ry="44" fill="#e0a45c"/><ellipse cx="80" cy="150" rx="28" ry="28" fill="#f5d9a8"/>' +
+    '<circle cx="42" cy="58" r="17" fill="#e0a45c"/><circle cx="118" cy="58" r="17" fill="#e0a45c"/><circle cx="42" cy="58" r="8" fill="#f2b9a0"/><circle cx="118" cy="58" r="8" fill="#f2b9a0"/>' +
+    '<circle cx="80" cy="82" r="44" fill="#e8b068"/><ellipse cx="80" cy="98" rx="20" ry="15" fill="#f5d9a8"/><ellipse cx="80" cy="92" rx="6" ry="4.5" fill="#4a2c2c"/>' +
+    '<circle cx="62" cy="76" r="5" fill="#4a2c2c"/><circle cx="98" cy="76" r="5" fill="#4a2c2c"/><circle cx="64" cy="74" r="1.8" fill="#fff"/><circle cx="100" cy="74" r="1.8" fill="#fff"/>' +
+    '<path d="M72 102 q8 8 16 0" stroke="#4a2c2c" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="52" cy="92" r="7" fill="#f4a3a3" opacity=".7"/><circle cx="108" cy="92" r="7" fill="#f4a3a3" opacity=".7"/>' +
+    '<path d="M62 42 L80 6 L98 42z" fill="#a98ad0"/><circle cx="80" cy="6" r="6" fill="#f9d56e"/><path d="M68 34 h24" stroke="#fff" stroke-width="3"/>' +
+    '<path d="M122 120 Q140 80 132 40" stroke="#b8284f" stroke-width="2" fill="none"/><ellipse cx="132" cy="28" rx="16" ry="20" fill="#f08aa6"/><ellipse cx="127" cy="22" rx="4" ry="7" fill="#fff" opacity=".5"/><circle cx="118" cy="128" r="11" fill="#e8b068"/></svg>';
   var DEFAULT_CAKE_SVG = '<svg viewBox="0 0 300 200" aria-hidden="true">' +
     '<path d="M20 30 L280 30" stroke="currentColor" stroke-width="2" fill="none" opacity=".5"/>' +
     '<path d="M20 30 l16 0 l-8 22z" fill="#c7b8ff"/><path d="M52.5 30 l16 0 l-8 22z" fill="#f9d56e"/><path d="M85 30 l16 0 l-8 22z" fill="#9be4d0"/><path d="M117.5 30 l16 0 l-8 22z" fill="#b9a6f0"/><path d="M150 30 l16 0 l-8 22z" fill="#c7b8ff"/><path d="M182.5 30 l16 0 l-8 22z" fill="#f9d56e"/><path d="M215 30 l16 0 l-8 22z" fill="#9be4d0"/><path d="M247.5 30 l16 0 l-8 22z" fill="#b9a6f0"/>' +
@@ -171,6 +178,7 @@
     burst(120);
     var r = $('cw').getBoundingClientRect();
     emojiBurst(6, r.left + r.width / 2, r.top, ['\u2728', '\uD83D\uDCAB', '\uD83C\uDF20']);
+    $('wishstar').classList.add('go');
     setTimeout(function () { $('bl').textContent = 'Your wish is on its way... \uD83D\uDCAB'; }, 1200);
     setTimeout(function () { go('s3'); }, 2600);
   }
@@ -319,22 +327,33 @@
   $('n5').onclick = function () { go('s6'); };
 
   /* ---------- s6: envelope / letter ---------- */
-  function renderLetter(raw) {
-    var lines = raw.split('\n');
-    var html = lines.map(function (line, i) {
-      if (line.trim() === '') return '<div class="ln gap"></div>';
-      return '<div class="ln" style="animation-delay:' + (i * 90) + 'ms">' + line + '</div>';
-    }).join('');
-    $('letter').innerHTML = html;
+  var letterTimer = null;
+  function typeLetter(raw) {
+    var p = $('letter'), i = 0;
+    p.textContent = '';
+    clearInterval(letterTimer);
+    letterTimer = setInterval(function () {
+      i++;
+      p.textContent = raw.slice(0, i);
+      p.scrollTop = p.scrollHeight;
+      if (i >= raw.length) {
+        clearInterval(letterTimer);
+        $('more').style.display = 'inline-block';
+      }
+    }, 28);
+    p.onclick = function () {
+      clearInterval(letterTimer);
+      p.textContent = raw;
+      $('more').style.display = 'inline-block';
+    };
   }
   $('env').onclick = function () {
     this.classList.add('open');
     $('tap').style.display = 'none';
     setTimeout(function () {
       $('env').style.display = 'none';
-      renderLetter($('letter').dataset.raw || '');
       $('letter').classList.add('on');
-      setTimeout(function () { $('more').style.display = 'inline-block'; }, 1300);
+      typeLetter($('letter').dataset.raw || '');
     }, 1100);
   };
   $('more').onclick = function () { go('s7'); };
@@ -354,8 +373,10 @@
     var e = $('env');
     e.style.display = ''; e.classList.remove('open');
     $('tap').style.display = ''; $('letter').classList.remove('on');
+    clearInterval(letterTimer); $('letter').textContent = '';
     $('more').style.display = 'none';
     $('gift').classList.remove('open');
+    $('wishstar').classList.remove('go');
   }
   $('again').onclick = function () { resetAll(); go('cover'); };
 

@@ -1,7 +1,7 @@
 // Personalize the surprise here. No coding needed below this line.
 window.BIRTHDAY_CONFIG = {
   // The birthday person's name
-  theirName: "Archi",
+  theirName: "Laddu",
 
   // Your name, shown at the end of the letter
   yourName: "Your Special Someone",
