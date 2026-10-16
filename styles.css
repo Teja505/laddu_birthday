@@ -103,6 +103,11 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
 .mascot-sm svg,.mascot-sm img{width:100%;display:block}
 .mascot-lg{width:min(190px,48vw)}
 .mascot-lg svg,.mascot-lg img{width:100%;display:block}
+.loading{font-style:italic}
+.dots span{display:inline-block;animation:dot-pulse 1.3s infinite;opacity:.2}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot-pulse{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
 /* letter */
 #paper{width:min(340px,90vw);max-height:62vh;overflow:auto;text-align:left;background:rgba(255,255,255,.7);

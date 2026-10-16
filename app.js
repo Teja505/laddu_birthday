@@ -191,6 +191,8 @@
     $('w-h').textContent = 'Close your eyes...';
     $('w-p').textContent = 'Make a little wish for the year ahead.';
     $('bearA').innerHTML = wishArt('before');
+    $('b4').classList.remove('hide');
+    $('w-loading').classList.add('hide');
     clearInterval(letterTimer);
     $('paper').textContent = '';
     $('b5').classList.add('hide');
@@ -299,7 +301,8 @@
     $('bearA').innerHTML = wishArt('made');
     $('wishstar').classList.add('go');
     burst(60);
-    this.disabled = true;
+    this.classList.add('hide');
+    $('w-loading').classList.remove('hide');
     setTimeout(function () { go('s5'); typeLetter(D.msg); }, 2600);
   };
 
