@@ -397,7 +397,7 @@
               go('s6');
               burst(160);
               emojiBurst(10, innerWidth / 2, innerHeight, ['\u2764', '\uD83C\uDF89', '\u2728']);
-            }, 1600);
+            }, 3500);
           }
         };
         field.appendChild(b);
