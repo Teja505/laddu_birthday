@@ -86,7 +86,12 @@
       prev.classList.add('leaving');
       setTimeout(function () { prev.classList.remove('on', 'leaving'); }, 550);
     }
-    if (id === 's1') playEnvelopePeek();
+    if (id === 's1') {
+      playEnvelopePeek();
+      $('sleepy').classList.add('hide');
+    } else {
+      $('sleepy').classList.remove('hide');
+    }
   }
 
   function playEnvelopePeek() {
