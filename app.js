@@ -14,17 +14,6 @@
   };
 
   /* ---------- default illustrations (used when no config image is set) ---------- */
-  var DEFAULT_ENVELOPE_SVG = '<svg viewBox="0 0 300 200" aria-hidden="true">' +
-    '<rect x="12" y="30" width="276" height="160" rx="12" fill="#efd6a8" stroke="#d1b07a" stroke-width="2"/>' +
-    '<path d="M12 42 L150 135 L288 42" fill="none" stroke="#d1b07a" stroke-width="2"/>' +
-    '<path d="M12 190 L120 110 M288 190 L180 110" stroke="#d1b07a" stroke-width="2"/>' +
-    '<path d="M12 42 Q150 -10 288 42 L150 135Z" fill="#f4e0b8" stroke="#d1b07a" stroke-width="2"/>' +
-    '<path d="M150 112 q-30 -30 -48 -10 q10 22 48 10 q38 12 48 -10 q-18 -20 -48 10z" fill="#a98ad0"/>' +
-    '<path d="M150 128 q-8 14 -20 30 M150 128 q8 14 20 30" stroke="#a98ad0" stroke-width="9" stroke-linecap="round"/>' +
-    '<path d="M150 140 c-22 -18 -14 -36 0 -26 c14 -10 22 8 0 26z" fill="#d9406b" stroke="#fff" stroke-width="2"/>' +
-    '<g stroke="#7a9a5a" fill="none" stroke-width="2"><path d="M40 170 q10 -40 8 -60"/><path d="M262 170 q-10 -40 -8 -60"/></g>' +
-    '<circle cx="48" cy="108" r="7" fill="#f08aa6"/><circle cx="254" cy="108" r="7" fill="#f08aa6"/></svg>';
-
   var DEFAULT_CAKE_SVG = '<svg viewBox="0 0 300 260" aria-hidden="true">' +
     '<ellipse cx="150" cy="238" rx="130" ry="14" fill="#e7e1e6"/>' +
     '<rect x="40" y="170" width="220" height="62" rx="10" fill="#f8e7dc"/><path d="M40 176 h220 v14 q-10 14 -20 0 q-10 16 -22 0 q-10 14 -22 0 q-12 16 -24 0 q-12 14 -24 0 q-12 16 -24 0 q-12 14 -22 0 q-14 16 -22 0z" fill="#e85d8a"/>' +
@@ -65,8 +54,12 @@
   $('sleepy').innerHTML = bear({ sleep: 1 });
   $('bearA').innerHTML = bear({});
   $('bearF').innerHTML = bear({ balloon: 1 });
-  $('envBear').innerHTML = bear({});
-  $('env').innerHTML = config.envelopeImage ? '<img src="' + config.envelopeImage + '" alt="">' : DEFAULT_ENVELOPE_SVG;
+  if (config.mascotImage) {
+    $('envPhoto').innerHTML = '<img src="' + config.mascotImage + '" alt="">';
+  } else {
+    $('envPhoto').innerHTML = bear({}) + '<div class="env-caption"></div>';
+    $('envPhoto').querySelector('.env-caption').textContent = 'This is for you, ' + D.name + '!';
+  }
   $('hl').innerHTML = cakeArt('full');
   $('hr').innerHTML = cakeArt('full');
   $('cakeB').innerHTML = cakeArt('icon');
@@ -84,14 +77,16 @@
       prev.classList.add('leaving');
       setTimeout(function () { prev.classList.remove('on', 'leaving'); }, 550);
     }
-    if (id === 's1') playEnvelopePeek();
+    if (id === 's1') playEnvelopeOpen();
   }
 
-  function playEnvelopePeek() {
-    var el = $('envPeek');
-    el.classList.remove('show');
+  var envelopeTimer = null;
+  function playEnvelopeOpen() {
+    var el = $('envelope');
+    clearTimeout(envelopeTimer);
+    el.classList.remove('open');
     void el.offsetWidth;
-    el.classList.add('show');
+    envelopeTimer = setTimeout(function () { el.classList.add('open'); }, 700);
   }
 
   /* ---------- bunting flags + night sky stars ---------- */
@@ -165,7 +160,6 @@
     document.body.className = '';
     $('ln').textContent = D.name;
     $('fn').textContent = D.name;
-    $('envName').textContent = D.name;
     $('wish').textContent = D.wish;
     $('sig').textContent = '\u2014 with love, ' + D.from;
     $('cakebox').classList.remove('cut');
@@ -184,7 +178,7 @@
     $('b4').disabled = false;
   }
   setup();
-  playEnvelopePeek();
+  playEnvelopeOpen();
 
   $('b1').onclick = function () { document.body.className = 'night'; go('night'); };
   $('b2').onclick = function () {
