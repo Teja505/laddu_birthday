@@ -252,7 +252,7 @@
     burst(70);
     var r = cakebox.getBoundingClientRect();
     emojiBurst(5, r.left + r.width / 2, r.top, ['\u2728', '\uD83D\uDCA8']);
-    $('c-h').textContent = 'Make a wish \u2728';
+    $('c-h').textContent = 'Yehhhh!!! \uD83C\uDF89';
     $('c-p').textContent = '';
     setTimeout(function () {
       $('c-h').textContent = 'Now make the first cut \u2728';
