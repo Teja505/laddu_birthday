@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2a1a4a">
+<title>A Birthday Surprise 🎂</title>
+<meta name="description" content="A little interactive birthday surprise, made with love.">
+<meta property="og:title" content="A Birthday Surprise 🎂">
+<meta property="og:description" content="Tap to unwrap a birthday surprise made just for you.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@500;600&family=Inter:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="sky" aria-hidden="true"></div>
+
+<section class="scene on" id="cover">
+  <div class="giftwrap" id="gift">
+    <svg viewBox="0 0 220 220" class="gift-svg" aria-hidden="true">
+      <rect x="30" y="95" width="160" height="105" rx="10" fill="var(--box)"/>
+      <rect x="30" y="95" width="160" height="30" fill="var(--box2)"/>
+      <rect x="96" y="95" width="28" height="105" fill="var(--ribbon)"/>
+      <rect x="30" y="95" width="160" height="105" fill="none"/>
+      <g class="gift-lid">
+        <rect x="20" y="70" width="180" height="34" rx="10" fill="var(--box2)"/>
+        <rect x="96" y="70" width="28" height="34" fill="var(--ribbon)"/>
+        <path class="bow" d="M110 70 C70 70 70 20 110 40 C150 20 150 70 110 70Z" fill="var(--ribbon)"/>
+        <circle cx="110" cy="58" r="10" fill="var(--ribbon-dark)"/>
+      </g>
+    </svg>
+    <div class="sparkles" aria-hidden="true">
+      <span>✨</span><span>✨</span><span>✨</span><span>✨</span>
+    </div>
+  </div>
+  <h1 class="cover-title">A surprise is waiting</h1>
+  <p class="sub">Tap the gift to open it</p>
+</section>
+
+<section class="scene" id="s1">
+  <h1 id="t1"></h1>
+  <svg class="cake" viewBox="0 0 300 200" aria-hidden="true">
+    <path d="M20 30 L280 30" stroke="var(--ink)" stroke-width="2" fill="none" opacity=".5"/>
+    <g id="flags"></g>
+    <ellipse cx="95" cy="120" rx="42" ry="38" fill="#c98f6b"/><circle cx="66" cy="90" r="14" fill="#c98f6b"/><circle cx="124" cy="90" r="14" fill="#c98f6b"/><ellipse cx="95" cy="128" rx="24" ry="18" fill="#f5dcc4"/><circle cx="82" cy="112" r="3.5" fill="#3b2a2a"/><circle cx="108" cy="112" r="3.5" fill="#3b2a2a"/><ellipse cx="95" cy="121" rx="5" ry="3.5" fill="#3b2a2a"/><circle cx="72" cy="124" r="6" fill="#f2b6d1" opacity=".8"/><circle cx="118" cy="124" r="6" fill="#f2b6d1" opacity=".8"/>
+    <ellipse cx="215" cy="120" rx="42" ry="38" fill="#fff"/><circle cx="186" cy="90" r="14" fill="#2f2a2a"/><circle cx="244" cy="90" r="14" fill="#2f2a2a"/><ellipse cx="200" cy="114" rx="9" ry="11" fill="#2f2a2a"/><ellipse cx="230" cy="114" rx="9" ry="11" fill="#2f2a2a"/><circle cx="201" cy="113" r="3" fill="#fff"/><circle cx="231" cy="113" r="3" fill="#fff"/><ellipse cx="215" cy="126" rx="4" ry="3" fill="#2f2a2a"/><circle cx="190" cy="128" r="6" fill="#f2b6d1" opacity=".8"/><circle cx="240" cy="128" r="6" fill="#f2b6d1" opacity=".8"/>
+    <rect x="95" y="140" width="120" height="48" rx="8" fill="#f9d56e"/><rect x="95" y="140" width="120" height="14" rx="7" fill="#fff"/><rect x="95" y="134" width="120" height="12" rx="6" fill="#9a7af4"/><text x="155" y="176" text-anchor="middle" font-size="14" font-weight="700" fill="#6d3ad6" font-family="Inter,sans-serif">HAPPY BDAY</text>
+    <rect x="152" y="112" width="6" height="24" fill="#9a7af4"/><ellipse cx="155" cy="106" rx="5" ry="9" fill="#ffb347"/>
+  </svg>
+  <p class="sub">Are you excited for what's next?</p>
+  <div class="row"><button id="yes" style="left:0">Yes</button><button id="no" class="ghost" style="right:0">No</button></div>
+</section>
+
+<section class="scene" id="s2">
+  <h2 id="t2"></h2>
+  <div class="cwrap" id="cw">
+    <div class="glow"></div>
+    <svg viewBox="0 0 200 220" width="200" height="220" aria-hidden="true">
+      <rect x="30" y="150" width="140" height="60" rx="10" fill="#c7b8ff"/><rect x="30" y="150" width="140" height="18" rx="9" fill="#fff"/>
+      <rect x="94" y="100" width="12" height="52" rx="3" fill="#f9d56e"/><rect x="94" y="100" width="12" height="8" fill="#fff"/>
+      <g class="flame"><path d="M100 60 C112 78 112 92 100 98 C88 92 88 78 100 60Z" fill="#ffb347"/><path d="M100 76 C106 86 106 92 100 96 C94 92 94 86 100 76Z" fill="#fff3b0"/></g>
+      <path class="smoke" d="M100 90 q-8 -14 0 -26 q8 -12 0 -24" stroke="#bbb" stroke-width="3" fill="none"/>
+    </svg>
+  </div>
+  <p class="sub" id="bl">Blow into the mic, or just tap the candle.</p>
+</section>
+
+<section class="scene" id="s3">
+  <h2>Pop all 4 balloons</h2>
+  <div id="bfield"></div>
+  <div id="chips"></div>
+</section>
+
+<section class="scene" id="s4">
+  <h2>Your Rose Bouquet 🌹</h2>
+  <svg id="bq" viewBox="0 0 300 300" role="img" aria-label="Rose bouquet"></svg>
+  <p class="sub">Tap the bouquet.</p>
+  <button id="n4" class="next-btn">Next</button>
+</section>
+
+<section class="scene" id="s5">
+  <h2>Some Sweet Moments</h2>
+  <p class="sub">Swipe the cards</p>
+  <div id="stack"></div>
+  <button id="n5" class="next-btn">Next</button>
+</section>
+
+<section class="scene" id="s6">
+  <h2>A Message From My Heart</h2>
+  <p class="sub" id="tap">Tap the envelope to open</p>
+  <div id="env">
+    <div class="back"></div>
+    <div class="flap"></div>
+    <div class="front"></div>
+    <div class="seal">❤</div>
+  </div>
+  <div id="letter"></div>
+  <button id="more" class="next-btn">One last surprise</button>
+</section>
+
+<section class="scene" id="s7">
+  <div class="fin">
+    <svg width="170" height="130" viewBox="0 0 170 130" aria-hidden="true"><circle cx="55" cy="72" r="38" fill="#fff" stroke="#eee"/><ellipse cx="42" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><ellipse cx="68" cy="28" rx="9" ry="24" fill="#fff" stroke="#eee"/><circle cx="44" cy="70" r="3" fill="#333"/><circle cx="66" cy="70" r="3" fill="#333"/><circle cx="55" cy="80" r="3" fill="#8d6af5"/><circle cx="125" cy="76" r="38" fill="#a9703f"/><circle cx="100" cy="46" r="12" fill="#a9703f"/><circle cx="150" cy="46" r="12" fill="#a9703f"/><circle cx="114" cy="72" r="3" fill="#222"/><circle cx="136" cy="72" r="3" fill="#222"/><ellipse cx="125" cy="84" rx="12" ry="9" fill="#e4c29c"/><circle cx="125" cy="81" r="3" fill="#222"/></svg>
+  </div>
+  <h2>Lots of love for you ❤</h2>
+  <p class="sub" id="fnl"></p>
+  <div class="row2">
+    <button id="again" class="ghost">Replay</button>
+    <button id="share" class="ghost">Copy a link to share</button>
+  </div>
+</section>
+
+<script src="birthday-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
