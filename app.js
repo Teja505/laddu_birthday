@@ -67,7 +67,6 @@
       '</svg>';
   }
 
-  $('sleepy').innerHTML = bear({ sleep: 1 });
   $('bearF').innerHTML = config.finaleImage ? '<img src="' + config.finaleImage + '" alt="">' : bear({ balloon: 1 });
   $('envPeek').innerHTML = config.envelopePeekImage
     ? '<img class="env-peek-photo" src="' + config.envelopePeekImage + '" alt="">'
@@ -90,12 +89,7 @@
       prev.classList.add('leaving');
       setTimeout(function () { prev.classList.remove('on', 'leaving'); }, 550);
     }
-    if (id === 's1') {
-      playEnvelopePeek();
-      $('sleepy').classList.add('hide');
-    } else {
-      $('sleepy').classList.remove('hide');
-    }
+    if (id === 's1') playEnvelopePeek();
     if (id === 's3') startMic(); else stopMic();
     if (id === 'sBalloons') balloons();
   }
