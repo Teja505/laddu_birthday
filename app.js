@@ -28,15 +28,17 @@
   }
 
   var cur = 'cover';
+  var activeScene = $('cover');
 
   function go(id) {
-    var current = document.querySelector('.scene.on');
     var next = $(id);
+    var prev = activeScene;
     cur = id;
+    activeScene = next;
     next.classList.add('on');
-    if (current && current !== next) {
-      current.classList.add('leaving');
-      setTimeout(function () { current.classList.remove('on', 'leaving'); }, 550);
+    if (prev && prev !== next) {
+      prev.classList.add('leaving');
+      setTimeout(function () { prev.classList.remove('on', 'leaving'); }, 550);
     }
     if (id === 's2') mic();
     if (id === 's3') balloons();
@@ -75,7 +77,7 @@
   /* ---------- confetti canvas ---------- */
   var cv = $('cv'), cx = cv.getContext('2d'), P = [], running = false;
   function size() { cv.width = innerWidth; cv.height = innerHeight; }
-  size(); addEventListener('resize', size);
+  size(); addEventListener('resize', size); addEventListener('orientationchange', size);
   function burst(n, x, y) {
     var c = ['#8d6af5', '#f9d56e', '#ff9fc3', '#fff', '#6d3ad6', '#9be4d0'];
     for (var i = 0; i < n; i++) {
@@ -200,14 +202,14 @@
   function balloons() {
     var field = $('bfield'), popped = 0;
     field.innerHTML = ''; $('chips').innerHTML = '';
-    var positions = [[6, 30], [62, 10], [30, 150], [70, 190]];
+    var positions = [[6, 8], [62, 2], [30, 44], [70, 56]];
     for (var i = 0; i < 4; i++) {
       (function (i) {
         var b = document.createElement('button');
         b.className = 'bal';
         b.setAttribute('aria-label', 'Pop balloon ' + (i + 1));
         b.style.left = positions[i][0] + '%';
-        b.style.top = positions[i][1] + 'px';
+        b.style.top = positions[i][1] + '%';
         b.style.animationDelay = (i * .4) + 's';
         b.innerHTML = '<svg viewBox="0 0 84 120"><ellipse cx="42" cy="44" rx="34" ry="40" fill="' + BALLOON_COLORS[i] + '" opacity=".88"/><ellipse cx="30" cy="30" rx="8" ry="14" fill="#fff" opacity=".5"/><path d="M42 84 l-5 8 h10z" fill="' + BALLOON_COLORS[i] + '"/><path d="M42 92 q-10 12 0 28" stroke="#6d3ad6" fill="none" stroke-width="2"/></svg>';
         b.onclick = function () {
