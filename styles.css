@@ -61,8 +61,18 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
 @keyframes shoot{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(115vw,-40vh) rotate(360deg)}}
 
 /* envelope */
-.env-wrap{width:min(300px,80vw);animation:float 3s ease-in-out infinite;touch-action:manipulation}
-.env-wrap svg,.env-wrap img{width:100%;display:block;filter:drop-shadow(0 12px 20px var(--shadow))}
+.env-wrap{position:relative;width:min(300px,80vw);margin-top:clamp(50px,14vh,70px);animation:float 3s ease-in-out infinite;touch-action:manipulation}
+.env-art svg,.env-art img{width:100%;display:block;filter:drop-shadow(0 12px 20px var(--shadow))}
+
+.env-peek{position:absolute;left:50%;bottom:62%;transform:translate(-50%,-6px) scale(1);opacity:1;
+  display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;z-index:2}
+.env-peek.show{animation:env-peek 1.2s .2s cubic-bezier(.3,1.6,.4,1) both}
+@keyframes env-peek{0%{opacity:0;transform:translate(-50%,24px) scale(.3)}60%{opacity:1;transform:translate(-50%,-14px) scale(1.08)}100%{opacity:1;transform:translate(-50%,-6px) scale(1)}}
+.env-bear{width:70px}
+.env-bear svg,.env-bear img{width:100%;display:block}
+.env-card{background:#fff;color:var(--ink);font-family:Caveat,cursive;font-weight:600;font-size:1.1rem;
+  padding:6px 16px;border-radius:12px;box-shadow:0 6px 14px var(--shadow);white-space:nowrap}
+.env-card em{color:var(--rose);font-style:normal}
 @keyframes float{50%{transform:translateY(-8px) rotate(-1deg)}}
 
 /* cake */

@@ -65,6 +65,7 @@
   $('sleepy').innerHTML = bear({ sleep: 1 });
   $('bearA').innerHTML = bear({});
   $('bearF').innerHTML = bear({ balloon: 1 });
+  $('envBear').innerHTML = bear({});
   $('env').innerHTML = config.envelopeImage ? '<img src="' + config.envelopeImage + '" alt="">' : DEFAULT_ENVELOPE_SVG;
   $('hl').innerHTML = cakeArt('full');
   $('hr').innerHTML = cakeArt('full');
@@ -83,6 +84,14 @@
       prev.classList.add('leaving');
       setTimeout(function () { prev.classList.remove('on', 'leaving'); }, 550);
     }
+    if (id === 's1') playEnvelopePeek();
+  }
+
+  function playEnvelopePeek() {
+    var el = $('envPeek');
+    el.classList.remove('show');
+    void el.offsetWidth;
+    el.classList.add('show');
   }
 
   /* ---------- bunting flags + night sky stars ---------- */
@@ -156,6 +165,7 @@
     document.body.className = '';
     $('ln').textContent = D.name;
     $('fn').textContent = D.name;
+    $('envName').textContent = D.name;
     $('wish').textContent = D.wish;
     $('sig').textContent = '\u2014 with love, ' + D.from;
     $('cakebox').classList.remove('cut');
@@ -174,6 +184,7 @@
     $('b4').disabled = false;
   }
   setup();
+  playEnvelopePeek();
 
   $('b1').onclick = function () { document.body.className = 'night'; go('night'); };
   $('b2').onclick = function () {
