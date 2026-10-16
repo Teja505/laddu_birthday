@@ -183,11 +183,22 @@
     $('wishstar').classList.remove('go');
     $('b2').disabled = false;
     $('b4').disabled = false;
+    $('noBtn').style.left = ''; $('noBtn').style.right = '0'; $('noBtn').style.top = '';
   }
   setup();
   playEnvelopePeek();
 
   $('b1').onclick = function () { document.body.className = 'night'; go('night'); };
+  var noBtn = $('noBtn');
+  function dodgeNo() {
+    noBtn.style.right = 'auto';
+    noBtn.style.left = (Math.random() * 170) + 'px';
+    noBtn.style.top = (Math.random() * 14 - 7) + 'px';
+  }
+  noBtn.onmouseenter = dodgeNo;
+  noBtn.onclick = dodgeNo;
+  noBtn.ontouchstart = function (e) { e.preventDefault(); dodgeNo(); };
+
   $('b2').onclick = function () {
     document.body.className = 'glow';
     burst(40);

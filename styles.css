@@ -31,6 +31,8 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 button.ghost{background:#fff;color:var(--ink)}
 button.mini{padding:9px 18px;min-height:auto;font-size:.85rem;box-shadow:none;opacity:.8}
 .hide{display:none!important}
+.row{display:flex;gap:14px;align-items:center;justify-content:center;position:relative;height:56px;width:min(260px,90vw)}
+.row button{position:absolute}
 
 /* night scene text colors */
 #night h1,#night h2{color:#fff}#night .sub{color:#b9b6e6}#night .tag{color:#ffd86b}
